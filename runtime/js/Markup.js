@@ -633,16 +633,16 @@ class MarkupUI {
     
         });
     
-        var CloseButton = document.createElement('img');
-        CloseButton.style.height = "48px";
-        CloseButton.style.width = "48px";
-        CloseButton.style.position = "absolute";
-        CloseButton.style.top = "6px";
-        CloseButton.style.left = "346px";
-        CloseButton.src = "extensions/images/Markup_save.png";
-        CloseButton.style.backgroundColor = "rgba(74,187,7)";
+        var FinishButton = document.createElement('img');
+        FinishButton.style.height = "48px";
+        FinishButton.style.width = "48px";
+        FinishButton.style.position = "absolute";
+        FinishButton.style.top = "6px";
+        FinishButton.style.left = "346px";
+        FinishButton.src = "extensions/images/Markup_save.png";
+        FinishButton.style.backgroundColor = "rgba(74,187,7)";
     
-        CloseButton.addEventListener("click",  () => { 
+        FinishButton.addEventListener("click",  () => { 
             UIContainer.innerHTML = "" ;
 
             if (this.markupCanvas.vuforiaScope.markupField != undefined && this.markupCanvas.vuforiaScope.markupField != '' ) {
@@ -667,7 +667,30 @@ class MarkupUI {
             }
         });
 
-        MarkupToolbarContainer.appendChild(CloseButton);
+        MarkupToolbarContainer.appendChild(FinishButton);
+
+
+        var CancelButton = document.createElement('img');
+        CancelButton.style.height = "48px";
+        CancelButton.style.width = "48px";
+        CancelButton.style.position = "absolute";
+        CancelButton.style.top = "6px";
+        CancelButton.style.left = "394px";
+        CancelButton.src = "extensions/images/Markup_cancel.png";
+        CancelButton.style.backgroundColor = "rgba(181,181,181)";
+        CancelButton.addEventListener("click",  () => { 
+
+            try { 
+                this.markupCanvas.vuforiaScope.$parent.fireEvent('markCancelled');
+            } catch (ex) {
+
+            }
+
+            CenterPanelSelector.removeChild(UIContainer);
+    
+        });
+
+        MarkupToolbarContainer.appendChild(CancelButton);
 
         // var UndoButton = document.createElement('img');
 

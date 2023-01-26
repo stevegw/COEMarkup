@@ -1,7 +1,7 @@
 class Markup {
 
 
-    constructor( vuforiaScope, imgsrc, markupWidth = 10, markupColor = "FF0D0D") {
+    constructor( vuforiaScope, imgsrc, includeborder, includedatestamp, markupWidth = 10, markupColor = "FF0D0D") {
 
         // let orientation = (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation;
 
@@ -21,7 +21,7 @@ var canvasHeight = (window.innerHeight > 0) ? window.innerHeight : screen.height
 
 console.log("canvasWidth=" + canvasWidth + " canvasHeight=" + canvasHeight);
 
-        let markupCanvas = new MarkupCanvas(vuforiaScope,canvasWidth,canvasHeight);
+        let markupCanvas = new MarkupCanvas(vuforiaScope,canvasWidth,canvasHeight , includeborder, includedatestamp, );
         let markupUI = new MarkupUI(markupCanvas, canvasWidth,canvasHeight ,imgsrc);
         markupCanvas.setupLens( imgsrc, markupUI.buildMarkUpUI());
     }
@@ -40,6 +40,8 @@ class MarkupCanvas {
     #mainElement;
     #canvasWidth;
     #canvasHeight;
+    #includeborder;
+    #includedatestamp;
     #markupWidth;
     #markupColor;
     #markupType;
@@ -50,7 +52,7 @@ class MarkupCanvas {
     #savedCanvas;
     #offset;
  
-    constructor( vuforiaScope, canvasWidth , canvasHeight,   markupWidth = 10, markupColor = "#fbc93d") {
+    constructor( vuforiaScope, canvasWidth , canvasHeight, includeborder, includedatestamp,  markupWidth = 10, markupColor = "#fbc93d") {
 
 
         this.matchMedia  = window.matchMedia("(orientation: portrait)");
@@ -65,6 +67,9 @@ class MarkupCanvas {
         this.#canvasWidth = canvasWidth - (2 * this.#offset);
         this.#canvasHeight = canvasHeight - (2 * this.#offset);
         this.#markupWidth = markupWidth;
+        this.#includeborder = includeborder;
+        this.#includedatestamp = includedatestamp;
+
         this.#markupColor = markupColor;
         this.#markupType = "marker";
 
@@ -268,28 +273,34 @@ class MarkupCanvas {
 
 
         let context = this.#lensCanvas.getContext("2d");
-        context.lineWidth = 80;
-        context.strokeStyle = 'rgba(73, 89, 53, 0.50)';
-        context.beginPath();
-        context.moveTo(0, 0);
-        context.lineTo(this.#canvasWidth, 0 );
-        context.lineTo(this.#canvasWidth, this.#canvasHeight);
-        context.lineTo(0 , this.#canvasHeight);
-        context.lineTo(0, 0);
-        context.stroke();
+
+        if (this.#includeborder === 'true') {
+            context.lineWidth = 80;
+            context.strokeStyle = 'rgba(73, 89, 53, 0.50)';
+            context.beginPath();
+            context.moveTo(0, 0);
+            context.lineTo(this.#canvasWidth, 0 );
+            context.lineTo(this.#canvasWidth, this.#canvasHeight);
+            context.lineTo(0 , this.#canvasHeight);
+            context.lineTo(0, 0);
+            context.stroke();
+        }
 
 
+        if (this.#includedatestamp === 'true') {
 
-        var today = new Date();
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-        var yyyy = today.getFullYear();
-        var time = today.getHours() + ":" + today.getMinutes();
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+            var time = today.getHours() + ":" + today.getMinutes();
 
-        var today = mm + '/' + dd + '/' + yyyy + " "+ time;
-        context.font = '30px serif';
-        context.fillStyle = 'rgba(255, 213, 0, 0.5)';
-        context.fillText(today, 10, 30);
+            var today = mm + '/' + dd + '/' + yyyy + " "+ time;
+            context.font = '30px serif';
+            context.fillStyle = 'rgba(255, 213, 0, 0.5)';
+            context.fillText(today, 10, 30);
+
+        }
 
     }
 
@@ -611,6 +622,12 @@ class MarkupUI {
     
         ResetButton.addEventListener("click",  () => { 
 
+            try { 
+                this.markupCanvas.vuforiaScope.$parent.fireEvent('markCancelled');
+            } catch (ex) {
+
+            }
+
             UIContainer.innerHTML = "" ;
             this.markupCanvas.setupLens( this.imgsrc, this.buildMarkUpUI());
     
@@ -630,7 +647,21 @@ class MarkupUI {
 
             if (this.markupCanvas.vuforiaScope.markupField != undefined && this.markupCanvas.vuforiaScope.markupField != '' ) {
                 this.markupCanvas.drawBoarder();
-                this.markupCanvas.vuforiaScope.markedupField =  this.markupCanvas.drawMarkupOntoImage( );
+                this.markupCanvas.vuforiaScope.markedupField =  this.markupCanvas.drawMarkupOntoImage();
+
+                try { 
+                    let contextArray = this.markupCanvas.vuforiaScope.markedupField.split(",");
+                    this.markupCanvas.vuforiaScope.markedupdataField =  contextArray[1];
+                } catch (ex) {
+
+                }
+
+                try { 
+                    this.markupCanvas.vuforiaScope.$parent.fireEvent('markCompleted');
+                } catch (ex) {
+
+                }
+
                 this.markupCanvas.vuforiaScope.$applyAsync();
 
             }

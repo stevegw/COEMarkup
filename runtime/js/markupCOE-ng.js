@@ -14,7 +14,10 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
       restrict: 'EA',
       scope: {
         markupField : '@',
-        markedupField: '='
+        markedupField: '=',
+        markedupdataField: '=',
+        includeborderField: '@',
+        includedatestampField: '@'
       },
       template: '<div></div>',
       link: function (scope, element, attr) {
@@ -29,7 +32,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
         var executeMarkup = function() {
           console.log('do the markup thang');
           if (!scope.data.disabled) {
-            markup = new Markup(scope,scope.markupField , scope.markedupField );
+            markup = new Markup(scope,scope.markupField ,  scope.includeborderField, scope.includedatestampField);
 
           } else {
             console.log('disabled');

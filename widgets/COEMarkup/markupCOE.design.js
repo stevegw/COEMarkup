@@ -42,6 +42,34 @@
           isBindingTarget: false,
           isBindingSource: true,
           showInput: false
+        },
+        {
+          name: 'markedupdata',
+          label: 'Resulting Image Data',
+          datatype: 'string',
+          resource_url: false,
+          default: '',
+          isBindingTarget: false,
+          isBindingSource: true,
+          showInput: false
+        },
+        {
+          name: 'includeborder',
+          label: 'Include border',
+          datatype: 'boolean',
+          default: false,
+          isBindingTarget: true,
+          isBindingSource: false,
+          showInput: true
+        },
+        {
+          name: 'includedatestamp',
+          label: 'Include date stamp',
+          datatype: 'boolean',
+          default: false,
+          isBindingTarget: true,
+          isBindingSource: false,
+          showInput: true
         }
       ],
 
@@ -58,6 +86,14 @@
         {
           name: 'markStart',
           label: 'Markup started'
+        },
+        {
+          name: 'markCompleted',
+          label: 'Markup completed'
+        },
+        {
+          name: 'markCancelled',
+          label: 'Markup cancelled'
         }
 
       ],
@@ -73,7 +109,7 @@
       },
 
       runtimeTemplate: function (props) {
-        var tmpl = '<div ng-markupcoe  markup-field={{me.markup}} markedup-field="me.markedup" ></div>' ; //original-field="me.original" markedup-field="me.markedup" delegate-field="delegate"></div>';
+        var tmpl = '<div ng-markupcoe  markup-field={{me.markup}} markedup-field="me.markedup" markedupdata-field="me.markedupdata" includeborder-field={{me.includeborder}} includedatestamp-field={{me.includedatestamp}} ></div>' ; //original-field="me.original" markedup-field="me.markedup" delegate-field="delegate"></div>';
         return tmpl;
       }
     };

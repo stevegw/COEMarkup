@@ -18,7 +18,8 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
         markedupField: '=',
         markedupdataField: '=',
         includeborderField: '@',
-        includedatestampField: '@'
+        includedatestampField: '@',
+        delegateField: '='
       },
       template: '<div></div>',
       link: function (scope, element, attr) {
@@ -57,7 +58,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
         });
 
         scope.$watch('markupField', function () {
-          console.log('markupField='+ scope.markupField);
+          //console.log('markupField='+ scope.markupField);
 
           if (scope.autolaunchField == "true") {
             if (scope.markupField != undefined && scope.markupField != '') {
@@ -68,12 +69,21 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
 
         });
 
+        scope.$watch('delegateField', function (delegate) {
+          if (delegate) {
+            delegate.start = function () { 
+              start(); 
+            };
+
+          }
+        });
+
         // Use this initially to see if your extension get deployed
         // If you don't see this message its not deployed
         // Comment out once you have it working
-        scope.$watch( function() {
-          console.log("Any watch "); 
-        });
+        // scope.$watch( function() {
+        //   console.log("Any watch "); 
+        // });
       }
     };
   }

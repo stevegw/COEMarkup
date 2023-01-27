@@ -23,6 +23,17 @@
 
       // List of properties that will be displayed in the widget properties panel once it's been dropped on the Canvas
       properties: [
+
+        {
+          name: 'autolaunch',
+          label: 'Auto lauch if incoming Image URL set',
+          datatype: 'boolean',
+          default: true,
+          isBindingTarget: true,
+          isBindingSource: false,
+          showInput: true
+        },
+
         {
           name: 'markup',
           label: 'Incoming Image URL',
@@ -109,7 +120,7 @@
       },
 
       runtimeTemplate: function (props) {
-        var tmpl = '<div ng-markupcoe  markup-field={{me.markup}} markedup-field="me.markedup" markedupdata-field="me.markedupdata" includeborder-field={{me.includeborder}} includedatestamp-field={{me.includedatestamp}} ></div>' ; //original-field="me.original" markedup-field="me.markedup" delegate-field="delegate"></div>';
+        var tmpl = '<div ng-markupcoe  autolaunch-field={{me.autolaunch}} markup-field={{me.markup}} markedup-field="me.markedup" markedupdata-field="me.markedupdata" includeborder-field={{me.includeborder}} includedatestamp-field={{me.includedatestamp}} ></div>' ; //original-field="me.original" markedup-field="me.markedup" delegate-field="delegate"></div>';
         return tmpl;
       }
     };

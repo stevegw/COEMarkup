@@ -13,6 +13,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
     return {
       restrict: 'EA',
       scope: {
+        autolaunchField: '@',
         markupField : '@',
         markedupField: '=',
         markedupdataField: '=',
@@ -32,7 +33,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
         var executeMarkup = function() {
           console.log('do the markup thang');
           if (!scope.data.disabled) {
-            markup = new Markup(scope,scope.markupField ,  scope.includeborderField, scope.includedatestampField);
+            let markup = new Markup(scope,scope.markupField ,  scope.includeborderField, scope.includedatestampField);
 
           } else {
             console.log('disabled');
@@ -47,7 +48,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
         }
 
         scope.$watch('markedupField', function () {
-          console.log('markedupField='+ scope.markedupField);
+          //console.log('markedupField='+ scope.markedupField);
 
           if (scope.markupField != undefined && scope.markupField != '') {
             scope.data.src = scope.markupField;
@@ -58,9 +59,11 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
         scope.$watch('markupField', function () {
           console.log('markupField='+ scope.markupField);
 
-          if (scope.markupField != undefined && scope.markupField != '') {
-            scope.data.src = scope.markupField;
-            start();
+          if (scope.autolaunchField == "true") {
+            if (scope.markupField != undefined && scope.markupField != '') {
+              scope.data.src = scope.markupField;
+              start();
+            }
           }
 
         });

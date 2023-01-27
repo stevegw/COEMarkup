@@ -442,6 +442,7 @@ class MarkupUI {
     yellowspot;
     bluespot;
     infoButton;
+    imgElement;
 
     constructor( canvas, width, height , imgsrc ) {
 
@@ -473,6 +474,8 @@ class MarkupUI {
             element.src = "extensions/images/Markup_redspotSelected.png";
         }
 
+        this.imgElement.style.borderColor = this.markupCanvas.markupColor;
+
     }
 
     
@@ -489,10 +492,9 @@ class MarkupUI {
         UIContainer.className = '';
         UIContainer.style.position = "absolute"; //Allowed values: static, absolute, fixed, relative, sticky, initial, inherit;  
         
-        let leftposition =  1 ; 
 
-        UIContainer.style.top = "1px"; 
-        UIContainer.style.left = leftposition + "px";
+        UIContainer.style.top = "0px"; 
+        UIContainer.style.left = "0px";
         UIContainer.style.width = this.width;
         UIContainer.style.height = this.height;
         UIContainer.style.backgroundColor = "transparent";
@@ -505,18 +507,17 @@ class MarkupUI {
         MarkupToolbarContainer.style.position = "absolute";
         MarkupToolbarContainer.style.width = this.width;
         MarkupToolbarContainer.style.height = "50px";
-        MarkupToolbarContainer.style.border = 'solid 1px rgba(0,0,0,0.1)';
-        MarkupToolbarContainer.style.backgroundColor = "rgba(74,187,7)";
+        MarkupToolbarContainer.style.backgroundColor = "transparent";
         MarkupToolbarContainer.style.top = "2px";
   
 
         this.yellowspot = document.createElement('img');
         this.yellowspot.id = "yellow";
         this.yellowspot.style.position = "absolute";
-        this.yellowspot.style.top = "6px";
-        this.yellowspot.style.left = "10px";
-        this.yellowspot.setAttribute("height", "48px");
-        this.yellowspot.setAttribute("width", "48px");
+        this.yellowspot.style.top = "2px";
+        this.yellowspot.style.left = "4px";
+        this.yellowspot.style.width = "48px";
+        this.yellowspot.style.height = "48px";
         this.yellowspot.style.backgroundColor = "rgba(74,187,7)";
         this.yellowspot.src = "extensions/images/Markup_yellowspot.png";
         MarkupToolbarContainer.appendChild(this.yellowspot);
@@ -529,8 +530,8 @@ class MarkupUI {
         this.redspot = document.createElement('img');
         this.redspot.id = "red";
         this.redspot.style.position = "absolute";
-        this.redspot.style.top = "6px";
-        this.redspot.style.left = "58px";
+        this.redspot.style.top = "2px";
+        this.redspot.style.left = "52px";
         this.redspot.setAttribute("height", "48px");
         this.redspot.setAttribute("width", "48px");
         this.redspot.style.backgroundColor = "rgba(74,187,7)";
@@ -545,8 +546,8 @@ class MarkupUI {
         this.bluespot = document.createElement('img');
         this.bluespot.id = "blue";
         this.bluespot.style.position = "absolute";
-        this.bluespot.style.top = "6px";
-        this.bluespot.style.left = "106px";
+        this.bluespot.style.top = "2px";
+        this.bluespot.style.left = "100px";
         this.bluespot.setAttribute("height", "48px");
         this.bluespot.setAttribute("width", "48px");
         this.bluespot.style.backgroundColor = "rgba(74,187,7)";
@@ -561,8 +562,8 @@ class MarkupUI {
         this.blackspot = document.createElement('img');
         this.blackspot.id = "black";
         this.blackspot.style.position = "absolute";
-        this.blackspot.style.top = "6px";
-        this.blackspot.style.left = "154px";
+        this.blackspot.style.top = "2px";
+        this.blackspot.style.left = "148px";
         this.blackspot.style.backgroundColor = "rgba(74,187,7)";
         this.blackspot.setAttribute("height", "48px");
         this.blackspot.setAttribute("width", "48px");
@@ -577,8 +578,8 @@ class MarkupUI {
     
         var marker = document.createElement('img');
         marker.style.position = "absolute";
-        marker.style.top = "6px";
-        marker.style.left = "202px";
+        marker.style.top = "2px";
+        marker.style.left = "196px";
         marker.setAttribute("height", "48px");
         marker.setAttribute("width", "48px");
         marker.style.backgroundColor = "rgba(74,187,7)";
@@ -594,8 +595,8 @@ class MarkupUI {
 
         var arrow = document.createElement('img');
         arrow.style.position = "absolute";
-        arrow.style.top = "6px";
-        arrow.style.left = "250px";
+        arrow.style.top = "2px";
+        arrow.style.left = "244px";
         arrow.setAttribute("height", "48px");
         arrow.setAttribute("width", "48px");
         arrow.style.backgroundColor = "rgba(74,187,7)";
@@ -612,8 +613,8 @@ class MarkupUI {
     
         var ResetButton = document.createElement('img');
         ResetButton.style.position = "absolute";
-        ResetButton.style.top = "6px";
-        ResetButton.style.left = "298px";
+        ResetButton.style.top = "2px";
+        ResetButton.style.left = "292px";
         ResetButton.style.height = "48px";
         ResetButton.style.width = "48px";
         ResetButton.src = "extensions/images/Markup_reset.png";
@@ -637,8 +638,8 @@ class MarkupUI {
         FinishButton.style.height = "48px";
         FinishButton.style.width = "48px";
         FinishButton.style.position = "absolute";
-        FinishButton.style.top = "6px";
-        FinishButton.style.left = "346px";
+        FinishButton.style.top = "2px";
+        FinishButton.style.left = "340px";
         FinishButton.src = "extensions/images/Markup_save.png";
         FinishButton.style.backgroundColor = "rgba(74,187,7)";
     
@@ -674,8 +675,8 @@ class MarkupUI {
         CancelButton.style.height = "48px";
         CancelButton.style.width = "48px";
         CancelButton.style.position = "absolute";
-        CancelButton.style.top = "6px";
-        CancelButton.style.left = "394px";
+        CancelButton.style.top = "2px";
+        CancelButton.style.left = "388px";
         CancelButton.src = "extensions/images/Markup_cancel.png";
         CancelButton.style.backgroundColor = "rgba(181,181,181)";
         CancelButton.addEventListener("click",  () => { 
@@ -714,14 +715,15 @@ class MarkupUI {
     
         let MarkupContainer = document.createElement('div');
         MarkupContainer.id = "markup-container";
-        let imgElement = document.createElement('img');
-        imgElement.id = "imgElement";
-        imgElement.style.border = '5px solid #d4d4d4';
-        imgElement.setAttribute("width", this.width);
-        imgElement.setAttribute("height", this.height);
-        imgElement.src = this.imgsrc;
+        this.imgElement = document.createElement('img');
+        this.imgElement.id = "imgElement";
+        this.imgElement.style.border = '5px solid';
+        this.imgElement.style.borderColor = this.markupCanvas.markupColor;
+        this.imgElement.setAttribute("width", this.width);
+        this.imgElement.setAttribute("height", this.height);
+        this.imgElement.src = this.imgsrc;
   
-        MarkupContainer.appendChild(imgElement);
+        MarkupContainer.appendChild(this.imgElement);
 
 
         // var table = document.createElement('table');
@@ -764,7 +766,7 @@ class MarkupUI {
         this.toggleSelectedColor (this.yellowspot);
         this.markupCanvas.markupType = "marker";
 
-      return imgElement;
+      return this.imgElement;
     }
 
 

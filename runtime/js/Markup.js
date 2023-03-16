@@ -491,7 +491,11 @@ class MarkupUI {
 
     }
 
-    
+    //
+    // This was created in the hope that a data grid widget would except the data from local endpoint
+    // currentlt a Datagrid only excepts THX endpoints.
+    // I could remove this but maybe in the future it will work
+    //
     buildInfoTable= function (rows) {
         var itable = { 
                 rows: rows,

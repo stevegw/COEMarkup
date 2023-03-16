@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Entities build="b670" majorVersion="9" minorVersion="2" modelPersistenceProviderPackage="PostgresPersistenceProviderPackage" revision="12" schemaVersion="1120" universal=""><StyleDefinitions/><Networks/><PersistenceProviderPackages/><Mashups/><ScriptFunctionLibraries/><Projects><Project artifactId="" aspect.projectType="Component" dependsOn="{&quot;extensions&quot;:&quot;&quot;,&quot;projects&quot;:&quot;&quot;}" description="" documentationContent="" groupId="" homeMashup="" lastModifiedDate="2021-10-27T15:02:29.702Z" minPlatformVersion="" name="FE_RWTakePhoto_PJ" packageVersion="1.0.0" projectName="FE_RWTakePhoto_PJ" publishResult="" state="DRAFT" tags=""><Owner name="ad4oqqcz-es-es" type="User"/><avatar/><DesignTimePermissions><Create/><Read/><Update/><Delete/><Metadata/></DesignTimePermissions><RunTimePermissions/><VisibilityPermissions><Visibility/></VisibilityPermissions><ConfigurationTableDefinitions/><ConfigurationTables/><ConfigurationChanges><ConfigurationChange changeAction="CREATE" changeReason="header : name : updated&#10;" timestamp="2020-04-21T21:00:16.143Z" user="Administrator"/><ConfigurationChange changeAction="CREATE" changeReason="" timestamp="2020-04-21T21:04:57.712Z" user="Todd"/><ConfigurationChange changeAction="CREATE" changeReason="" timestamp="2021-09-21T16:45:55.558Z" user="Administrator"/></ConfigurationChanges></Project></Projects><Users/><DirectoryServices/><Widgets/><MediaEntities/><Groups/><PersistenceProviders/><ModelTags/><LocalizationTables/><Dashboards/><StyleThemes/><DataShapes><DataShape baseDataShape="" description="" documentationContent="" homeMashup="" lastModifiedDate="2023-01-29T15:15:10.404Z" name="Vuforia_Stream_DS" projectName="FE_RWTakePhoto_PJ" tags=""><Owner name="sgreywilson" type="User"/><avatar/><DesignTimePermissions><Create/><Read/><Update/><Delete/><Metadata/></DesignTimePermissions><RunTimePermissions/><VisibilityPermissions><Visibility/></VisibilityPermissions><ConfigurationTableDefinitions/><ConfigurationTables/><FieldDefinitions><FieldDefinition aspect.isPrimaryKey="false" baseType="STRING" description="" name="details" ordinal="4"/><FieldDefinition aspect.isPrimaryKey="false" baseType="STRING" description="" name="guid" ordinal="5"/><FieldDefinition aspect.isPrimaryKey="false" baseType="STRING" description="" name="imagestringurl" ordinal="6"/><FieldDefinition aspect.isPrimaryKey="false" baseType="STRING" description="" name="user" ordinal="3"/></FieldDefinitions><ConfigurationChanges><ConfigurationChange changeAction="CREATE" changeReason="header : name : updated, projectName : updated&#10;fields : project : added, title : added, user : added&#10;" timestamp="2022-11-24T14:30:58.550Z" user="sgreywilson"/><ConfigurationChange changeAction="MODIFY" changeReason="fields : details : added, guid : added, imagestringurl : added, title : deleted, project : deleted&#10;" timestamp="2023-01-29T15:03:16.164Z" user="sgreywilson"/></ConfigurationChanges></DataShape><DataShape baseDataShape="" description="" documentationContent="" homeMashup="" lastModifiedDate="2021-10-27T15:02:21.818Z" name="FE_RWTakePhotoList_DS" projectName="FE_RWTakePhoto_PJ" tags=""><Owner name="ad4oqqcz-es-es" type="User"/><avatar/><DesignTimePermissions><Create/><Read/><Update/><Delete/><Metadata/></DesignTimePermissions><RunTimePermissions/><VisibilityPermissions><Visibility/></VisibilityPermissions><ConfigurationTableDefinitions/><ConfigurationTables/><FieldDefinitions><FieldDefinition baseType="HYPERLINK" description="Download link to save file on client" name="downloadLink" ordinal="0"/><FieldDefinition baseType="DATETIME" description="Date last modified" name="lastModifiedDate" ordinal="0"/><FieldDefinition baseType="STRING" description="Directory name" name="name" ordinal="0"/><FieldDefinition aspect.isPrimaryKey="true" baseType="STRING" description="Full path" name="path" ordinal="0"/><FieldDefinition baseType="NUMBER" description="File size" name="size" ordinal="0"/></FieldDefinitions><ConfigurationChanges><ConfigurationChange changeAction="CREATE" changeReason="" timestamp="2021-09-21T16:45:54.180Z" user="Administrator"/></ConfigurationChanges></DataShape><DataShape baseDataShape="" description="" documentationContent="" homeMashup="" lastModifiedDate="2023-01-29T21:13:31.432Z" name="Markupstream_DS" projectName="FE_RWTakePhoto_PJ" tags=""><Owner name="sgreywilson" type="User"/><avatar/><DesignTimePermissions><Create/><Read/><Update/><Delete/><Metadata/></DesignTimePermissions><RunTimePermissions/><VisibilityPermissions><Visibility/></VisibilityPermissions><ConfigurationTableDefinitions/><ConfigurationTables/><FieldDefinitions><FieldDefinition aspect.isPrimaryKey="false" baseType="STRING" description="" name="details" ordinal="4"/><FieldDefinition aspect.isPrimaryKey="false" baseType="STRING" description="" name="guid" ordinal="5"/><FieldDefinition aspect.isPrimaryKey="true" baseType="STRING" description="Entry ID" name="id" ordinal="0"/><FieldDefinition aspect.isPrimaryKey="false" baseType="IMAGELINK" description="" name="imagestringurl" ordinal="6"/><FieldDefinition baseType="LOCATION" description="Location of the entry" name="location" ordinal="0"/><FieldDefinition baseType="STRING" description="Source of the entry" name="source" ordinal="0"/><FieldDefinition baseType="STRING" description="Source type" name="sourceType" ordinal="0"/><FieldDefinition aspect.tagType="DataTags" baseType="TAGS" description="Tags" name="tags" ordinal="0"/><FieldDefinition baseType="DATETIME" description="Time of entry" name="timestamp" ordinal="0"/><FieldDefinition aspect.isPrimaryKey="false" baseType="STRING" description="" name="user" ordinal="3"/></FieldDefinitions><ConfigurationChanges><ConfigurationChange changeAction="CREATE" changeReason="header : name : updated, projectName : updated&#10;" timestamp="2023-01-29T19:34:07.989Z" user="sgreywilson"/><ConfigurationChange changeAction="MODIFY" changeReason="fields : imagestringurl : updated&#10;" timestamp="2023-01-29T19:36:05.729Z" user="sgreywilson"/><ConfigurationChange changeAction="MODIFY" changeReason="fields : imagestringurl : updated&#10;" timestamp="2023-01-29T21:13:31.431Z" user="sgreywilson"/></ConfigurationChanges></DataShape></DataShapes><Things><Thing description="" documentationContent="" effectiveThingPackage="FileRepositoryThing" enabled="true" homeMashup="" identifier="" inheritedValueStream="" lastModifiedDate="2023-03-15T02:34:36.982Z" name="FE_RWTakePhoto_Repo" projectName="FE_RWTakePhoto_PJ" published="false" tags="" thingTemplate="FileRepository" valueStream=""><Owner name="ad4oqqcz-es-es" type="User"/><avatar/><DesignTimePermissions><Create/><Read/><Update/><Delete/><Metadata/></DesignTimePermissions><RunTimePermissions><Permissions resourceName="*"><PropertyRead><Principal isPermitted="true" name="Todd" type="User"/><Principal isPermitted="true" name="Users" type="Group"/></PropertyRead><PropertyWrite><Principal isPermitted="true" name="Todd" type="User"/><Principal isPermitted="true" name="Users" type="Group"/></PropertyWrite><ServiceInvoke><Principal isPermitted="true" name="Todd" type="User"/><Principal isPermitted="true" name="Users" type="Group"/></ServiceInvoke><EventInvoke><Principal isPermitted="true" name="Todd" type="User"/><Principal isPermitted="true" name="Users" type="Group"/></EventInvoke><EventSubscribe><Principal isPermitted="true" name="Todd" type="User"/><Principal isPermitted="true" name="Users" type="Group"/></EventSubscribe></Permissions></RunTimePermissions><VisibilityPermissions><Visibility><Principal isPermitted="true" name="Everyone" type="Organization"/></Visibility></VisibilityPermissions><ConfigurationTableDefinitions/><ConfigurationTables/><ThingShape><PropertyDefinitions/><ServiceDefinitions><ServiceDefinition aspect.isAsync="false" category="" description="" isAllowOverride="false" isLocalOnly="false" isOpen="false" isPrivate="false" name="GetPhoto"><ResultType baseType="NOTHING" description="" name="result" ordinal="0"/><ParameterDefinitions/></ServiceDefinition><ServiceDefinition aspect.isAsync="false" category="" description="" isAllowOverride="false" isLocalOnly="false" isOpen="false" isPrivate="false" name="GetPhotoList"><ResultType aspect.dataShape="FE_RWTakePhotoList_DS" baseType="INFOTABLE" description="" name="result" ordinal="0"/><ParameterDefinitions/></ServiceDefinition><ServiceDefinition aspect.isAsync="false" category="" description="" isAllowOverride="false" isLocalOnly="false" isOpen="false" isPrivate="false" name="GetPhotoStream"><ResultType aspect.dataShape="Markupstream_DS" baseType="INFOTABLE" description="" name="result" ordinal="0"/><ParameterDefinitions/></ServiceDefinition><ServiceDefinition aspect.isAsync="false" category="" description="" isAllowOverride="false" isLocalOnly="false" isOpen="false" isPrivate="false" name="UploadPhoto"><ResultType baseType="NOTHING" description="" name="result" ordinal="0"/><ParameterDefinitions><FieldDefinition baseType="STRING" description="" name="details" ordinal="3"/><FieldDefinition baseType="IMAGE" description="" name="imageContent" ordinal="1"/></ParameterDefinitions></ServiceDefinition></ServiceDefinitions><EventDefinitions/><ServiceMappings/><ServiceImplementations><ServiceImplementation description="" handlerName="Script" name="GetPhoto"><ConfigurationTables><ConfigurationTable dataShapeName="" description="" isMultiRow="false" name="Script" ordinal="0"><DataShape><FieldDefinitions><FieldDefinition baseType="STRING" description="code" name="code" ordinal="0"/></FieldDefinitions></DataShape><Rows><Row><code><![CDATA[logger.debug("Entering GetPhoto" );
+
+// Content: IMAGE
+var Content =  me.LoadImage({
+	path: undefined /* STRING */
+});]]></code></Row></Rows></ConfigurationTable></ConfigurationTables></ServiceImplementation><ServiceImplementation description="" handlerName="Script" name="GetPhotoList"><ConfigurationTables><ConfigurationTable dataShapeName="" description="" isMultiRow="false" name="Script" ordinal="0"><DataShape><FieldDefinitions><FieldDefinition baseType="STRING" description="code" name="code" ordinal="0"/></FieldDefinitions></DataShape><Rows><Row><code><![CDATA[logger.debug("Entering GetPhotoList" );
+
+var params = {
+    infoTableName : "InfoTable",
+    dataShapeName : "FE_RWTakePhotoList_DS"
+};
+
+// Will work on this later
+// CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(IOTPhotoListing)
+// var result = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+
+var list = me.GetFileListingWithLinks({
+	path: '/photos' /* STRING */,
+	nameMask: undefined /* STRING */
+});
+
+let sort = {
+    name: 'lastModifiedDate',
+    ascending: false
+};
+list.Sort(sort);
+
+result = list; 
+
+
+]]></code></Row></Rows></ConfigurationTable></ConfigurationTables></ServiceImplementation><ServiceImplementation description="" handlerName="Script" name="GetPhotoStream"><ConfigurationTables><ConfigurationTable dataShapeName="" description="" isMultiRow="false" name="Script" ordinal="0"><DataShape><FieldDefinitions><FieldDefinition baseType="STRING" description="code" name="code" ordinal="0"/></FieldDefinitions></DataShape><Rows><Row><code><![CDATA[logger.debug("Entering GetPhotoStream" );
+
+var params = {
+    infoTableName : "InfoTable",
+    dataShapeName : "FE_RWTakePhotoList_DS"
+};
+
+
+// result: STRING
+let user = Resources["CurrentSessionInfo"].GetCurrentUser();
+
+
+// Will work on this later
+// CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(IOTPhotoListing)
+// var result = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+
+
+var query = {
+  "filters": {
+    "type": "AND",
+    "filters": [
+      {
+        "fieldName": "user",
+        "type": "EQ",
+        "value": user
+      }
+    ]
+  }
+};
+
+
+
+
+// result: INFOTABLE dataShape: ""
+let result = Things["Vuforia_Stream"].QueryStreamEntriesWithData({
+	oldestFirst: undefined /* BOOLEAN */,
+	maxItems: undefined /* NUMBER {"defaultValue":500} */,
+	sourceTags: undefined /* TAGS */,
+	endDate: undefined /* DATETIME */,
+	query: undefined /* QUERY */,
+	source: undefined /* STRING */,
+	startDate: undefined /* DATETIME */,
+	tags: undefined /* TAGS */
+});
+
+
+
+
+]]></code></Row></Rows></ConfigurationTable></ConfigurationTables></ServiceImplementation><ServiceImplementation description="" handlerName="Script" name="UploadPhoto"><ConfigurationTables><ConfigurationTable dataShapeName="" description="" isMultiRow="false" name="Script" ordinal="0"><DataShape><FieldDefinitions><FieldDefinition baseType="STRING" description="code" name="code" ordinal="0"/></FieldDefinitions></DataShape><Rows><Row><code><![CDATA[logger.debug("Entering UploadPhoto" );
+
+
+// result: STRING
+let userName = Resources["CurrentSessionInfo"].GetCurrentUser();
+
+// generateGUID():STRING
+let id = generateGUID();
+let fileName = id+".png";
+
+// Values: INFOTABLE dataShape: ""
+let values = Things["Vuforia_Stream"].CreateValues();
+
+values.guid = id;
+values.details = details;
+values.imagestringurl = "/Thingworx/FileRepositories/"+ me.name +"/photos/"+fileName;
+values.user = userName;
+
+Things["Vuforia_Stream"].AddStreamEntry({
+	sourceType: undefined /* STRING */,
+	values: values /* INFOTABLE */,
+	location: undefined /* LOCATION */,
+	source: undefined /* STRING */,
+	timestamp: undefined /* DATETIME */,
+	tags: undefined /* TAGS */
+});
+
+
+ me.SaveImage({
+	path: "/photos/"+fileName/* STRING */,
+	content: imageContent /* IMAGE */
+});]]></code></Row></Rows></ConfigurationTable></ConfigurationTables></ServiceImplementation></ServiceImplementations><Subscriptions/></ThingShape><PropertyBindings/><RemotePropertyBindings/><RemoteServiceBindings/><RemoteEventBindings/><AlertConfigurations/><ImplementedShapes/><ThingProperties/><ConfigurationChanges><ConfigurationChange changeAction="CREATE" changeReason="" timestamp="2021-09-21T16:45:56.569Z" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="services : UploadPhoto : service updated&#10;" timestamp="2023-01-28T20:10:25.035Z" user="sgreywilson"/><ConfigurationChange changeAction="MODIFY" changeReason="services : UploadPhoto : service updated&#10;" timestamp="2023-01-28T20:14:12.879Z" user="sgreywilson"/><ConfigurationChange changeAction="MODIFY" changeReason="services : UploadPhoto : service updated&#10;" timestamp="2023-01-28T20:16:03.670Z" user="sgreywilson"/><ConfigurationChange changeAction="MODIFY" changeReason="services : UploadPhoto : input parameter details added, inputs updated&#10;" timestamp="2023-01-29T01:12:53.850Z" user="sgreywilson"/><ConfigurationChange changeAction="MODIFY" changeReason="services : UploadPhoto : service updated&#10;" timestamp="2023-01-29T15:18:47.207Z" user="sgreywilson"/><ConfigurationChange changeAction="MODIFY" changeReason="services : UploadPhoto : input parameter fileName deleted, inputs updated&#10;" timestamp="2023-01-29T18:35:51.684Z" user="sgreywilson"/><ConfigurationChange changeAction="MODIFY" changeReason="services : UploadPhoto : service updated&#10;" timestamp="2023-01-29T18:37:30.808Z" user="sgreywilson"/><ConfigurationChange changeAction="MODIFY" changeReason="services : UploadPhoto : service updated&#10;" timestamp="2023-01-29T18:44:48.086Z" user="sgreywilson"/><ConfigurationChange changeAction="MODIFY" changeReason="services : UploadPhoto : service updated&#10;" timestamp="2023-01-29T18:46:01.176Z" user="sgreywilson"/><ConfigurationChange changeAction="MODIFY" changeReason="services : UploadPhoto : service updated&#10;" timestamp="2023-01-29T18:46:58.314Z" user="sgreywilson"/><ConfigurationChange changeAction="MODIFY" changeReason="services : UploadPhoto : service updated&#10;" timestamp="2023-01-29T18:47:50.982Z" user="sgreywilson"/><ConfigurationChange changeAction="MODIFY" changeReason="services : GetPhotoStream : service added&#10;" timestamp="2023-01-29T19:29:59.557Z" user="sgreywilson"/><ConfigurationChange changeAction="MODIFY" changeReason="services : GetPhotoStream : service updated&#10;" timestamp="2023-01-29T19:30:33.033Z" user="sgreywilson"/><ConfigurationChange changeAction="MODIFY" changeReason="services : GetPhotoStream : service updated&#10;" timestamp="2023-01-29T19:30:43.472Z" user="sgreywilson"/><ConfigurationChange changeAction="MODIFY" changeReason="services : GetPhotoStream : service updated&#10;" timestamp="2023-01-29T19:31:41.369Z" user="sgreywilson"/><ConfigurationChange changeAction="MODIFY" changeReason="services : GetPhotoStream : service updated&#10;" timestamp="2023-01-29T19:32:31.964Z" user="sgreywilson"/><ConfigurationChange changeAction="MODIFY" changeReason="services : GetPhotoList : service updated&#10;" timestamp="2023-01-29T20:54:43.675Z" user="sgreywilson"/><ConfigurationChange changeAction="MODIFY" changeReason="services : UploadPhoto : service updated&#10;GetPhotoStream : output updated&#10;" timestamp="2023-01-29T21:09:11.936Z" user="sgreywilson"/><ConfigurationChange changeAction="MODIFY" changeReason="services : GetPhotoList : service updated&#10;" timestamp="2023-03-14T13:10:21.883Z" user="sgreywilson"/><ConfigurationChange changeAction="MODIFY" changeReason="services : GetPhotoList : service updated&#10;" timestamp="2023-03-14T13:12:08.856Z" user="sgreywilson"/><ConfigurationChange changeAction="MODIFY" changeReason="services : GetPhotoList : service updated&#10;" timestamp="2023-03-14T13:12:24.296Z" user="sgreywilson"/><ConfigurationChange changeAction="FORCEEDIT" changeReason="ForceEdit" timestamp="2023-03-15T02:34:36.985Z" user="swall"/></ConfigurationChanges></Thing><Thing description="" documentationContent="" effectiveThingPackage="StreamThing" enabled="true" homeMashup="StreamMashup" identifier="" inheritedValueStream="" lastModifiedDate="2023-01-29T15:18:22.188Z" name="Vuforia_Stream" projectName="FE_RWTakePhoto_PJ" published="false" tags="" thingTemplate="Stream" valueStream=""><Owner name="sgreywilson" type="User"/><avatar/><DesignTimePermissions><Create/><Read/><Update/><Delete/><Metadata/></DesignTimePermissions><RunTimePermissions/><VisibilityPermissions><Visibility/></VisibilityPermissions><ConfigurationTableDefinitions/><ConfigurationTables><ConfigurationTable dataShapeName="" description="Data Thing Configuration" isMultiRow="false" name="DataThingSettings" ordinal="0"><DataShape><FieldDefinitions><FieldDefinition baseType="STRING" description="Persistence Provider Name" name="persistenceProvider" ordinal="0"/></FieldDefinitions></DataShape><Rows><Row><persistenceProvider><![CDATA[ThingworxPersistenceProvider]]></persistenceProvider></Row></Rows></ConfigurationTable><ConfigurationTable dataShapeName="" description="Data Shape Configuration" isMultiRow="false" name="Settings" ordinal="0"><DataShape><FieldDefinitions><FieldDefinition aspect.friendlyName="Data Shape" baseType="DATASHAPENAME" description="Data shape" name="dataShape" ordinal="0"/></FieldDefinitions></DataShape><Rows><Row><accumulatedDataShape><json><![CDATA[{"fieldDefinitions":{"imagestringurl":{"name":"imagestringurl","aspects":{"isPrimaryKey":false},"description":"","baseType":"STRING","ordinal":5},"project":{"name":"project","aspects":{"isDeleted":true,"isPrimaryKey":false},"description":"","baseType":"STRING","ordinal":0},"guid":{"name":"guid","aspects":{"isPrimaryKey":false},"description":"","baseType":"STRING","ordinal":4},"details":{"name":"details","aspects":{"isPrimaryKey":false},"description":"","baseType":"STRING","ordinal":3},"title":{"name":"title","aspects":{"isDeleted":true,"isPrimaryKey":false},"description":"","baseType":"STRING","ordinal":1},"user":{"name":"user","aspects":{"isPrimaryKey":false},"description":"","baseType":"STRING","ordinal":2}}}]]></json></accumulatedDataShape><dataShape><![CDATA[Vuforia_Stream_DS]]></dataShape></Row></Rows></ConfigurationTable><ConfigurationTable dataShapeName="" description="Configurable options to tune Stream performance" isMultiRow="false" name="PersistenceProviderCustomSettings" ordinal="2"><DataShape><FieldDefinitions><FieldDefinition aspect.friendlyName="Persistence Provider Custom Settings Table" baseType="INFOTABLE" description="Persistence Provider Custom Config Table" name="customConfigTable" ordinal="0"/></FieldDefinitions></DataShape><Rows><Row><customConfigTable><infoTable><DataShape><FieldDefinitions/></DataShape><Rows/></infoTable></customConfigTable></Row></Rows></ConfigurationTable></ConfigurationTables><ThingShape><PropertyDefinitions/><ServiceDefinitions><ServiceDefinition aspect.isAsync="false" category="" description="" isAllowOverride="false" isLocalOnly="false" isOpen="false" isPrivate="false" name="logUsage"><ResultType baseType="NOTHING" description="" name="result" ordinal="0"/><ParameterDefinitions><FieldDefinition baseType="STRING" description="" name="project" ordinal="1"/><FieldDefinition baseType="STRING" description="" name="title" ordinal="2"/></ParameterDefinitions></ServiceDefinition></ServiceDefinitions><EventDefinitions/><ServiceMappings/><ServiceImplementations><ServiceImplementation description="" handlerName="Script" name="logUsage"><ConfigurationTables><ConfigurationTable dataShapeName="" description="" isMultiRow="false" name="Script" ordinal="0"><DataShape><FieldDefinitions><FieldDefinition baseType="STRING" description="code" name="code" ordinal="0"/></FieldDefinitions></DataShape><Rows><Row><code><![CDATA[// Values: INFOTABLE dataShape: ""
+let Values = me.CreateValues();
+
+Values.project = project;
+Values.title = title;
+Values.user = Resources["CurrentSessionInfo"].GetCurrentUser();
+
+let today = new Date();
+
+me.AddStreamEntry({
+	sourceType: undefined /* STRING */,
+	values: Values /* INFOTABLE */,
+	location: undefined /* LOCATION */,
+	source: undefined /* STRING */,
+	tags: undefined /* TAGS */,
+	timestamp: today /* DATETIME */
+});]]></code></Row></Rows></ConfigurationTable></ConfigurationTables></ServiceImplementation></ServiceImplementations><Subscriptions/></ThingShape><PropertyBindings/><RemotePropertyBindings/><RemoteServiceBindings/><RemoteEventBindings/><AlertConfigurations/><ImplementedShapes/><ThingProperties/><ConfigurationChanges><ConfigurationChange changeAction="CREATE" changeReason="header : name : updated, projectName : updated&#10;" timestamp="2022-11-24T14:31:12.892Z" user="sgreywilson"/><ConfigurationChange changeAction="MODIFY" changeReason="services : logUsage : service added&#10;" timestamp="2022-11-24T14:36:27.132Z" user="sgreywilson"/><ConfigurationChange changeAction="MODIFY" changeReason="services : logUsage : service updated&#10;" timestamp="2022-11-24T14:37:52.441Z" user="sgreywilson"/><ConfigurationChange changeAction="MODIFY" changeReason="" timestamp="2022-11-24T14:40:57.030Z" user="sgreywilson"/><ConfigurationChange changeAction="MODIFY" changeReason="configuration : dataShape : updated&#10;" timestamp="2023-01-29T15:18:01.329Z" user="sgreywilson"/><ConfigurationChange changeAction="MODIFY" changeReason="" timestamp="2023-01-29T15:18:22.186Z" user="sgreywilson"/></ConfigurationChanges></Thing></Things><Logs/><Authenticators/><ThingPackages/><NotificationDefinitions/><ApplicationKeys/><StateDefinitions/><ThingTemplates/><ExtensionPackages/><Organizations/><Menus/><ThingGroups/><Resources/><DataTags/><ThingShapes/><Subsystems/><NotificationContents/></Entities>

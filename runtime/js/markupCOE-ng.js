@@ -17,6 +17,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
         markupField : '@',
         markedupField: '=',
         markedupdataField: '=',
+        sessionimagesField: '=',
         includeborderField: '@',
         includedatestampField: '@',
         delegateField: '='
@@ -25,10 +26,12 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
       link: function (scope, element, attr) {
 
         var lastUpdated = 'unknown';
+
         scope.data = { name: undefined, 
                    disabled: false, 
                         src: undefined,
-                        markedup: undefined 
+                        markedup: undefined,
+                        sessionimages: []
                      };
                      
         var executeMarkup = function() {
@@ -47,9 +50,16 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
           scope.$parent.fireEvent('markStart');
           executeMarkup();
         }
+        
+
+        scope.$watch('markedupdataField', function () {
+          console.log('markedupdataField changed');
+
+        });
+
 
         scope.$watch('markedupField', function () {
-          //console.log('markedupField='+ scope.markedupField);
+          console.log('markedupField changed');
 
           if (scope.markupField != undefined && scope.markupField != '') {
             scope.data.src = scope.markupField;
@@ -57,8 +67,14 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
 
         });
 
+        scope.$watch('sessionimagesField', function () {
+          console.log('sessionimagesField changed');
+
+        });
+
+
         scope.$watch('markupField', function () {
-          //console.log('markupField='+ scope.markupField);
+          console.log('markupField changed');
 
           if (scope.autolaunchField == "true") {
             if (scope.markupField != undefined && scope.markupField != '') {

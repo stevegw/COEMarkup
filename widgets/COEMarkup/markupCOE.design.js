@@ -65,6 +65,15 @@
           showInput: false
         },
         {
+          name: 'sessionimages',
+          label: 'Session Images ',
+          datatype: 'infotable',
+          isBindingTarget: false,
+          isBindingSource: true,
+          showInput: false
+        },
+
+        {
           name: 'includeborder',
           label: 'Include border',
           datatype: 'boolean',
@@ -120,7 +129,7 @@
       },
 
       runtimeTemplate: function (props) {
-        var tmpl = '<div ng-markupcoe  autolaunch-field={{me.autolaunch}} markup-field={{me.markup}} markedup-field="me.markedup" markedupdata-field="me.markedupdata" includeborder-field={{me.includeborder}} includedatestamp-field={{me.includedatestamp}}  delegate-field="delegate" ></div>' ; //original-field="me.original" markedup-field="me.markedup" delegate-field="delegate"></div>';
+        var tmpl = '<div ng-markupcoe  autolaunch-field={{me.autolaunch}} markup-field={{me.markup}} markedup-field="me.markedup" markedupdata-field="me.markedupdata"  sessionimages-field="me.sessionimages"     includeborder-field={{me.includeborder}} includedatestamp-field={{me.includedatestamp}}  delegate-field="delegate" ></div>' ; //original-field="me.original" markedup-field="me.markedup" delegate-field="delegate"></div>';
         return tmpl;
       }
     };

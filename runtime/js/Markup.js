@@ -57,7 +57,7 @@ class MarkupCanvas {
     #savedCanvas;
     #offset;
  
-    constructor( vuforiaScope, canvasWidth , canvasHeight, includeborder, includedatestamp,  markupWidth = 10, markupColor = "#fbc93d") {
+    constructor( vuforiaScope, canvasWidth , canvasHeight, includeborder, includedatestamp,  markupWidth = 5, markupColor = "#fbc93d") {
 
 
         this.matchMedia  = window.matchMedia("(orientation: portrait)");

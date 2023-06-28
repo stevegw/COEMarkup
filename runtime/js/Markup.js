@@ -689,6 +689,7 @@ class MarkupUI {
                 let contextArray = this.markupCanvas.vuforiaScope.markedupField.split(",");
                 this.markupCanvas.vuforiaScope.markedupdataField =  contextArray[1];
                 this.markupCanvas.vuforiaScope.$parent.fireEvent('markCompleted');
+                this.markupCanvas.vuforiaScope.$parent.$applyAsync();
            
                 //const myTimeout = setTimeout( this.markupCanvas.vuforiaScope.$parent.fireEvent('markCompleted'), 500);
 

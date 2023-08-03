@@ -197,10 +197,6 @@ class MarkupCanvas {
     }
 
 
-
-
-
-
     getCursorPos(e) {
         let a, x = 0, y = 0;
         e = e || window.event;

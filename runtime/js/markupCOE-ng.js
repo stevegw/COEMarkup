@@ -6,20 +6,21 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
   'use strict';
 
   var markupcoeModule = angular.module('markupcoe-ng', []);
-  markupcoeModule.directive('ngMarkupcoe', ['$timeout', '$http', ngMarkupcoe]);
+  markupcoeModule.directive('ngMarkupcoe', ['$timeout', '$interval', '$http', '$window', '$injector', ngMarkupcoe]);
 
-  function ngMarkupcoe($timeout, $http) {
+  function ngMarkupcoe($timeout, $interval, $http, $window, $injector) {
 
     return {
       restrict: 'EA',
       scope: {
         autolaunchField: '@',
-        markupField : '@',
+        markupField: '@',
         markedupField: '=',
         markedupdataField: '=',
         sessionimagesField: '=',
         includeborderField: '@',
         includedatestampField: '@',
+        takenphotoField: '=',
         delegateField: '='
       },
       template: '<div></div>',
@@ -33,9 +34,26 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
                         markedup: undefined,
                         sessionimages: []
                      };
+
+        scope.renderer = $window.cordova ? vuforia : $injector.get('threeJsTmlRenderer');
+
+        var photocallback = function (pngBase64String) {
+
+          scope.takenphotoField = 'data:image/png;base64,' + pngBase64String;        // define the size for the image widget
+          scope.$applyAsync();
+      
+        };
+      
+      
+        var takeScreenShot = function(showAugmentation ) {
+          var params = {withAugmentation: showAugmentation};
+          scope.renderer.takeScreenshot(params, photocallback, null);
+      
+          }
+      
                      
         var executeMarkup = function() {
-          console.log('do the markup thang');
+          console.log('do the markup');
           if (!scope.data.disabled) {
             let markup = new Markup(scope,scope.markupField ,  scope.includeborderField, scope.includedatestampField);
 
@@ -44,11 +62,28 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
 
           }
         };
+
+
+
+        var executeTakePhoto = function () {
+
+          takeScreenShot(true);
+        
+        }
+
+        
         var start = function() {
           console.log('Starting markup');
           scope.data.disabled = false;
           scope.$parent.fireEvent('markStart');
           executeMarkup();
+        }
+        var takephoto = function() {
+          console.log('Starting takephoto');
+          scope.data.disabled = false;
+          executeTakePhoto();
+          scope.$parent.fireEvent('photoTaken');
+          
         }
         
 
@@ -85,10 +120,18 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
 
         });
 
+        scope.$watch('takenphotoField', function () {
+          console.log('takenphotoField ' + scope.takenphotoField );
+
+        });
+
         scope.$watch('delegateField', function (delegate) {
           if (delegate) {
             delegate.start = function () { 
               start(); 
+            };
+            delegate.takephoto = function () { 
+              takephoto(); 
             };
 
           }
@@ -103,5 +146,8 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
       }
     };
   }
+
+
+
 
 }());

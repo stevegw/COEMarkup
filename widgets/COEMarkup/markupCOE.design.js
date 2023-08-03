@@ -90,6 +90,16 @@
           isBindingTarget: true,
           isBindingSource: false,
           showInput: true
+        },
+        {
+          name: 'takenphoto',
+          label: 'taken Photo Image URL',
+          datatype: 'string',
+          resource_url: false,
+          default: '',
+          isBindingTarget: false,
+          isBindingSource: true,
+          showInput: false
         }
       ],
 
@@ -97,6 +107,10 @@
         {
           name: 'start',
           label: 'Start MarkUp'
+        },
+        {
+          name: 'takephoto',
+          label: 'Take Photo'
         }
 
       ],
@@ -114,6 +128,10 @@
         {
           name: 'markCancelled',
           label: 'Markup cancelled'
+        },
+        {
+          name: 'photoTaken',
+          label: 'Photo Taken'
         }
 
       ],
@@ -129,7 +147,7 @@
       },
 
       runtimeTemplate: function (props) {
-        var tmpl = '<div ng-markupcoe  autolaunch-field={{me.autolaunch}} markup-field={{me.markup}} markedup-field="me.markedup" markedupdata-field="me.markedupdata"  sessionimages-field="me.sessionimages"     includeborder-field={{me.includeborder}} includedatestamp-field={{me.includedatestamp}}  delegate-field="delegate" ></div>' ; //original-field="me.original" markedup-field="me.markedup" delegate-field="delegate"></div>';
+        var tmpl = '<div ng-markupcoe  autolaunch-field={{me.autolaunch}} markup-field={{me.markup}} markedup-field="me.markedup" markedupdata-field="me.markedupdata"  sessionimages-field="me.sessionimages"     includeborder-field={{me.includeborder}} includedatestamp-field={{me.includedatestamp}} takenphoto-field="me.takenphoto" delegate-field="delegate" ></div>' ; //original-field="me.original" markedup-field="me.markedup" delegate-field="delegate"></div>';
         return tmpl;
       }
     };

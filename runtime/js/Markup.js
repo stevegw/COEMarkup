@@ -649,11 +649,11 @@ class MarkupUI {
     
         ResetButton.addEventListener("click",  () => { 
 
-            try { 
-                this.markupCanvas.vuforiaScope.$parent.fireEvent('markCancelled');
-            } catch (ex) {
+            // try { 
+            //     this.markupCanvas.vuforiaScope.$parent.fireEvent('markCancelled');
+            // } catch (ex) {
 
-            }
+            // }
 
             UIContainer.innerHTML = "" ;
             this.markupCanvas.setupLens( this.imgsrc, this.buildMarkUpUI());

@@ -56,19 +56,15 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
           console.log('do the markup');
           if (!scope.data.disabled) {
             let markup = new Markup(scope,scope.markupField ,  scope.includeborderField, scope.includedatestampField);
-
           } else {
             console.log('disabled');
-
           }
         };
 
 
 
         var executeTakePhoto = function () {
-
           takeScreenShot(true);
-        
         }
 
         
@@ -85,13 +81,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
           scope.$parent.fireEvent('photoTaken');
           
         }
-        
-
-        scope.$watch('markedupdataField', function () {
-          console.log('markedupdataField changed');
-
-        });
-
 
         scope.$watch('markedupField', function () {
           console.log('markedupField changed');
@@ -102,11 +91,18 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
 
         });
 
-        scope.$watch('sessionimagesField', function () {
-          console.log('sessionimagesField changed');
+        // markedupdataField
+        scope.$watch('markedupdataField', function () {
+          console.log('markedupdataField changed');
+          scope.$parent.$applyAsync();
+          if (scope.markedupdataField != undefined && scope.markedupdataField != "") {
+            $timeout(function () {
+              scope.$parent.fireEvent('markCompleted');
+            },50); 
+          }
+
 
         });
-
 
         scope.$watch('markupField', function () {
           console.log('markupField changed');

@@ -684,7 +684,7 @@ class MarkupUI {
                 this.markupCanvas.vuforiaScope.sessionimagesField =  this.buildInfoTable(this.markupCanvas.vuforiaScope.data.sessionimages);
                 let contextArray = this.markupCanvas.vuforiaScope.markedupField.split(",");
                 this.markupCanvas.vuforiaScope.markedupdataField =  contextArray[1];
-                this.markupCanvas.vuforiaScope.$parent.fireEvent('markCompleted');
+                //this.markupCanvas.vuforiaScope.$parent.fireEvent('markCompleted');
                 this.markupCanvas.vuforiaScope.$parent.$applyAsync();
            
                 //const myTimeout = setTimeout( this.markupCanvas.vuforiaScope.$parent.fireEvent('markCompleted'), 500);
@@ -717,27 +717,6 @@ class MarkupUI {
         });
 
         MarkupToolbarContainer.appendChild(CancelButton);
-
-        // var UndoButton = document.createElement('img');
-
-        // UndoButton.style.height = "48px";
-        // UndoButton.style.width = "75px";
-        // UndoButton.style.position = "absolute";
-        // UndoButton.style.top = "6px";
-        // UndoButton.style.left = "450px";
-        // UndoButton.style.backgroundColor = "rgba(74,187,7)";
-        // UndoButton.src = "app/resources/Uploaded/Markup_reset.png";
-        // UndoButton.addEventListener("click",  () => { 
-        //     UIContainer.innerHTML = "" ;
-        //     this.markupCanvas.setupLens( this.markupCanvas.previousImage, this.buildMarkUpUI());
-    
-        // });
-    
-        // MarkupToolbarContainer.appendChild(UndoButton);
-
-
-
-    
         let MarkupContainer = document.createElement('div');
         MarkupContainer.id = "markup-container";
         this.imgElement = document.createElement('img');
@@ -749,44 +728,14 @@ class MarkupUI {
         this.imgElement.src = this.imgsrc;
   
         MarkupContainer.appendChild(this.imgElement);
-
-
-        // var table = document.createElement('table');
-
-        //     var tr1 = document.createElement('tr');   
-        //     var td1 = document.createElement('td');
-        //     td1.appendChild(MarkupToolbarContainer);
-        //     tr1.appendChild(td1);
-        //     var tr2 = document.createElement('tr');   
-        //     var td2 = document.createElement('td');
-        //     td2.appendChild(MarkupContainer);
-        //     tr2.appendChild(td2);
-        //     table.appendChild(tr1);
-        //     table.appendChild(tr2);
-    
-
-        //     table.style.position = "fixed"; //Allowed values: static, absolute, fixed, relative, sticky, initial, inherit;   
-        //     table.style.top = "15vh";
-        //     table.style.left = "2vh";
-        //     table.style.backgroundColor = "transparent";
-            //CenterPanelSelector.appendChild(table);
-
         //Append the div to the higher level div 
         UIContainer.appendChild(MarkupContainer);
         UIContainer.appendChild(MarkupToolbarContainer);
- 
-
         this.toggleSelectedColor (this.yellowspot);
         marker.src = "extensions/images/Markup_markerSelected.png";
         arrow.src = "extensions/images/Markup_arrow.png";
-
-
-        //this.markupCanvas.parentNode.insertBefore(MarkupToolbarContainer,this.markupCanvas);
-     
-    
         //Append the div to the higher level div  
         CenterPanelSelector.appendChild(UIContainer);
-
         this.markupCanvas.markupColor = "#fbc93d"; 
         this.toggleSelectedColor (this.yellowspot);
         this.markupCanvas.markupType = "marker";

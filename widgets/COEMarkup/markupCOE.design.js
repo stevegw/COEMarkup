@@ -1,11 +1,11 @@
 // This widget definition will get combined into combined-widgets.js file along with all other widget definitions
 // use of anonymous func ensures nothing here leaks into global scope
 (function() {
-  function twxmarkupcoe() {
+  function wdgmarkupcoe() {
     return {
       // Required, this will be used as the top level tag when it's dropped on the Canvas
       // use a custom prefix to so the name won't collide with other widgets
-      elementTag: 'txw-markupCOE',
+      elementTag: 'wdg-markupcoe',
 
       // Text displayed for the widget in the Palette
       label: 'Markup COE',
@@ -143,7 +143,7 @@
 
       // HTML to render when the widget is dropped on the Canvas
       designTemplate: function () {
-        return '<div class="markupcoeWidget"></div>';
+        return '<div class="markupcoeWidget" style="display:none"></div>';
       },
 
       runtimeTemplate: function (props) {
@@ -155,6 +155,6 @@
 
   // registers the widget in Studio so that it gets displayed in the Widget Palette, it will only show up in the
   // Widget Palette for views that this widget is registered for (as determined by category property)
-  twxAppBuilder.widget('twxmarkupcoe', twxmarkupcoe);
+  twxAppBuilder.widget('wdg-markupcoe', wdgmarkupcoe);
 
 }());

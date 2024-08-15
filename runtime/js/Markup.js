@@ -1,6 +1,6 @@
 class Markup {
 
-
+    markupUI;
 
     constructor( vuforiaScope, imgsrc, includeborder, includedatestamp, markupWidth = 10, markupColor = "FF0D0D") {
 
@@ -25,8 +25,8 @@ class Markup {
         console.log("canvasWidth=" + canvasWidth + " canvasHeight=" + canvasHeight);
 
         let markupCanvas = new MarkupCanvas(vuforiaScope,canvasWidth,canvasHeight , includeborder, includedatestamp );
-        let markupUI = new MarkupUI(markupCanvas, canvasWidth,canvasHeight ,imgsrc );
-        markupCanvas.setupLens( imgsrc, markupUI.buildMarkUpUI());
+        this.markupUI = new MarkupUI(markupCanvas, canvasWidth,canvasHeight ,imgsrc );
+        markupCanvas.setupLens( imgsrc, this.markupUI.buildMarkUpUI());
 
     }
 
@@ -460,7 +460,7 @@ class MarkupUI {
         this.height = height;
         this.imgsrc = imgsrc;
         this.markup = markup;
- 
+
     }
 
  
@@ -511,7 +511,7 @@ class MarkupUI {
         let CenterPanelQuery = 'body > ion-side-menus > ion-side-menu-content > ion-nav-view > ion-view > ion-content > twx-widget > twx-widget-content > \n' +
             'twx-container-content > twx-widget:nth-child(2) > twx-widget-content > div > twx-container-content > div.panel.body.undefined > div.panel.undefined.center';
     
-        let CenterPanelSelector = document.querySelector(CenterPanelQuery);
+        this.CenterPanelSelector = document.querySelector(CenterPanelQuery);
 
         var UIContainer = document.createElement('div');
         UIContainer.id = 'ui-container';
@@ -686,7 +686,7 @@ class MarkupUI {
                 this.markupCanvas.vuforiaScope.markedupdataField =  contextArray[1];
                 //this.markupCanvas.vuforiaScope.$parent.fireEvent('markCompleted');
                 this.markupCanvas.vuforiaScope.$parent.$applyAsync();
-           
+                this.close();
                 //const myTimeout = setTimeout( this.markupCanvas.vuforiaScope.$parent.fireEvent('markCompleted'), 500);
 
 
@@ -706,13 +706,11 @@ class MarkupUI {
         CancelButton.style.backgroundColor = "rgba(181,181,181)";
         CancelButton.addEventListener("click",  () => { 
 
-            try { 
-                this.markupCanvas.vuforiaScope.$parent.fireEvent('markCancelled');
-            } catch (ex) {
 
-            }
+            this.close();
 
-            CenterPanelSelector.removeChild(UIContainer);
+
+            //this.CenterPanelSelector.removeChild(UIContainer);
     
         });
 
@@ -735,13 +733,29 @@ class MarkupUI {
         marker.src = "extensions/images/Markup_markerSelected.png";
         arrow.src = "extensions/images/Markup_arrow.png";
         //Append the div to the higher level div  
-        CenterPanelSelector.appendChild(UIContainer);
+        this.CenterPanelSelector.appendChild(UIContainer);
         this.markupCanvas.markupColor = "#fbc93d"; 
         this.toggleSelectedColor (this.yellowspot);
         this.markupCanvas.markupType = "marker";
 
       return this.imgElement;
     }
+
+    close () {
+
+        try { 
+
+
+            while (this.CenterPanelSelector.hasChildNodes()) {
+                this.CenterPanelSelector.removeChild(this.CenterPanelSelector.firstChild);
+              }
+
+            this.markupCanvas.vuforiaScope.$parent.fireEvent('markCancelled');
+        } catch (ex) {
+
+        }
+      
+      }
 
 
 }

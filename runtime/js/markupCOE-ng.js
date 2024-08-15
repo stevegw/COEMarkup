@@ -53,9 +53,18 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
       
                      
         var executeMarkup = function() {
+          if (scope.data.markedup != undefined) {
+
+            try {
+              scope.data.markedup.MarkupUI.close();
+            }catch(ex) {
+                // ignore
+            }
+          }
           console.log('do the markup');
           if (!scope.data.disabled) {
             let markup = new Markup(scope,scope.markupField ,  scope.includeborderField, scope.includedatestampField);
+            scope.data.markedup = markup;
           } else {
             console.log('disabled');
           }

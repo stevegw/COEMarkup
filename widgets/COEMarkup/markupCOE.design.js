@@ -12,7 +12,7 @@
 
       // category to assign the widget to, this value will be used by the
       // project definition to filter which widgets are valid for that type of project
-      category: 'ar',
+      //category: 'ar',
 
       // list of groups this widget will be included in the widget palette
       // standard value are Containers, Input, and Other

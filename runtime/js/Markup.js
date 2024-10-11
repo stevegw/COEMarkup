@@ -508,10 +508,21 @@ class MarkupUI {
 
     buildMarkUpUI = function () {
 
-        let CenterPanelQuery = 'body > ion-side-menus > ion-side-menu-content > ion-nav-view > ion-view > ion-content > twx-widget > twx-widget-content > \n' +
+        let CenterPanelQuery3D = 'body > ion-side-menus > ion-side-menu-content > ion-nav-view > ion-view > ion-content > twx-widget > twx-widget-content > \n' +
             'twx-container-content > twx-widget:nth-child(2) > twx-widget-content > div > twx-container-content > div.panel.body.undefined > div.panel.undefined.center';
     
-        this.CenterPanelSelector = document.querySelector(CenterPanelQuery);
+        let CenterPanelQuery2D = '.twx-view-overlay';
+
+        let CenterPanelQuery = '.twx-view-overlay';
+    
+        let query3D  = document.querySelector(CenterPanelQuery3D);
+        let query2D  = document.querySelector(CenterPanelQuery2D);
+
+        if (query3D != undefined) {
+            this.CenterPanelSelector = query3D;
+        } else {
+            this.CenterPanelSelector = query2D;
+        }
 
         var UIContainer = document.createElement('div');
         UIContainer.id = 'ui-container';

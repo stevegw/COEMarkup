@@ -72,6 +72,31 @@
           isBindingSource: true,
           showInput: false
         },
+        {
+          name: 'markupcolor',
+          label: 'pen color',
+          datatype: 'select',
+          default: '#FFFF00', 
+          editor: 'select',
+          options: [
+            {label: 'black',  value: "#000000"},
+            {label: 'red',    value: "#FF0000"},
+            {label: 'yellow', value: "#FFFF00"},
+            {label: 'blue',   value: "#0000FF"}
+          ],
+          isBindingTarget: true,
+          isBindingSource: false,
+          showInput: true
+        },
+        {
+          name: 'markupresizescale',
+          label: 'pixel resize width',
+          datatype: 'string',
+          default: '',
+          isBindingTarget: true,
+          isBindingSource: false,
+          showInput: true
+        },
 
         {
           name: 'includeborder',
@@ -147,7 +172,7 @@
       },
 
       runtimeTemplate: function (props) {
-        var tmpl = '<div ng-markupcoe  autolaunch-field={{me.autolaunch}} markup-field={{me.markup}} markedup-field="me.markedup" markedupdata-field="me.markedupdata"  sessionimages-field="me.sessionimages"     includeborder-field={{me.includeborder}} includedatestamp-field={{me.includedatestamp}} takenphoto-field="me.takenphoto" delegate-field="delegate" ></div>' ; //original-field="me.original" markedup-field="me.markedup" delegate-field="delegate"></div>';
+        var tmpl = '<div ng-markupcoe  autolaunch-field={{me.autolaunch}} markup-field={{me.markup}} markedup-field="me.markedup" markedupdata-field="me.markedupdata"  sessionimages-field="me.sessionimages"  markupcolor-field={{me.markupcolor}}    markupresizescale-field={{me.markupresizescale}}    includeborder-field={{me.includeborder}} includedatestamp-field={{me.includedatestamp}} takenphoto-field="me.takenphoto" delegate-field="delegate" ></div>' ; //original-field="me.original" markedup-field="me.markedup" delegate-field="delegate"></div>';
         return tmpl;
       }
     };

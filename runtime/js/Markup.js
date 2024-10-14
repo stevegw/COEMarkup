@@ -2,7 +2,7 @@ class Markup {
 
     markupUI;
 
-    constructor( vuforiaScope, imgsrc, includeborder, includedatestamp, markupWidth = 10, markupColor = "FF0D0D") {
+    constructor( vuforiaScope, imgsrc, includeborder, includedatestamp , markupColor ,markupWidth='5' , markupresizescale  ) {
 
         // let orientation = (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation;
 
@@ -20,13 +20,25 @@ class Markup {
         var canvasWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
         var canvasHeight = (window.innerHeight > 0) ? window.innerHeight : screen.height;
    
-
+        if (  String(markupColor).toLowerCase === "black" || markupColor === "#000000" ) {
+            markupColor = "#000000";
+        } else if (String(markupColor).toLowerCase === "red" || markupColor === "#FF0000") {
+            markupColor = "#FF0000";
+        } else if (String(markupColor).toLowerCase === "yellow" || markupColor === "#FFFF00") {
+            markupColor = "#FFFF00";
+        } else if (String(markupColor).toLowerCase === "blue" || markupColor === "#0000FF") {
+            markupColor = "#0000FF";
+        } else {
+            markupColor = "#FFFF00";
+        }
 
         console.log("canvasWidth=" + canvasWidth + " canvasHeight=" + canvasHeight);
 
-        let markupCanvas = new MarkupCanvas(vuforiaScope,canvasWidth,canvasHeight , includeborder, includedatestamp );
-        this.markupUI = new MarkupUI(markupCanvas, canvasWidth,canvasHeight ,imgsrc );
+        let markupCanvas = new MarkupCanvas(vuforiaScope,canvasWidth,canvasHeight , includeborder, includedatestamp , markupColor , markupWidth , markupresizescale );
+        this.markupUI = new MarkupUI(markupCanvas, canvasWidth,canvasHeight ,imgsrc , );
         markupCanvas.setupLens( imgsrc, this.markupUI.buildMarkUpUI());
+
+
 
     }
 
@@ -49,6 +61,7 @@ class MarkupCanvas {
     #includedatestamp;
     #markupWidth;
     #markupColor;
+    #markupResizeScale;
     #markupType;
     #vuforiaScope;
     #backgroundLensimgsrc;
@@ -57,7 +70,7 @@ class MarkupCanvas {
     #savedCanvas;
     #offset;
  
-    constructor( vuforiaScope, canvasWidth , canvasHeight, includeborder, includedatestamp,  markupWidth = 5, markupColor = "#fbc93d") {
+    constructor( vuforiaScope, canvasWidth , canvasHeight, includeborder, includedatestamp,   markupColor , markupWidth , markupResizeScale ) {
 
 
         this.matchMedia  = window.matchMedia("(orientation: portrait)");
@@ -72,6 +85,8 @@ class MarkupCanvas {
         this.#canvasWidth = canvasWidth - (2 * this.#offset);
         this.#canvasHeight = canvasHeight - (2 * this.#offset);
         this.#markupWidth = markupWidth;
+        this.#markupResizeScale = markupResizeScale;
+        
         this.#includeborder = includeborder;
         this.#includedatestamp = includedatestamp;
 
@@ -154,6 +169,12 @@ class MarkupCanvas {
         this.#markupType = markupType;
 
     }
+
+    get markupResizeScale() {
+
+        return this.#markupResizeScale;
+    }
+
 
     get canvasLens() {
 
@@ -273,7 +294,7 @@ class MarkupCanvas {
        
     };
 
-    drawBoarder =  () => {
+    drawBoarder =  (scale) => {
 
 
         let context = this.#lensCanvas.getContext("2d");
@@ -283,9 +304,9 @@ class MarkupCanvas {
             context.strokeStyle = 'rgba(73, 89, 53, 0.50)';
             context.beginPath();
             context.moveTo(0, 0);
-            context.lineTo(this.#canvasWidth, 0 );
-            context.lineTo(this.#canvasWidth, this.#canvasHeight);
-            context.lineTo(0 , this.#canvasHeight);
+            context.lineTo(scale*(this.#canvasWidth), 0) ;
+            context.lineTo(scale*(this.#canvasWidth), scale*(this.#canvasHeight));
+            context.lineTo(0 , scale*(this.#canvasHeight));
             context.lineTo(0, 0);
             context.stroke();
         }
@@ -430,6 +451,19 @@ class MarkupCanvas {
 
     }
 
+    scaleMarkupImage(scale) {
+
+        let ctx = this.#lensCanvas.getContext("2d");
+        let image = new Image();
+        image.src = this.#backgroundLensimgsrc;
+
+        ctx.globalCompositeOperation = 'destination-over';
+        ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, scale*(this.#canvasWidth), scale*(this.#canvasHeight));
+        ctx.globalCompositeOperation = 'source-over';
+        return  this.#lensCanvas.toDataURL();
+
+    }
+
 
 
 };
@@ -512,9 +546,6 @@ class MarkupUI {
             'twx-container-content > twx-widget:nth-child(2) > twx-widget-content > div > twx-container-content > div.panel.body.undefined > div.panel.undefined.center';
     
         let CenterPanelQuery2D = '.twx-view-overlay';
-
-        let CenterPanelQuery = '.twx-view-overlay';
-    
         let query3D  = document.querySelector(CenterPanelQuery3D);
         let query2D  = document.querySelector(CenterPanelQuery2D);
 
@@ -687,14 +718,35 @@ class MarkupUI {
             UIContainer.innerHTML = "" ;
 
             if (this.markupCanvas.vuforiaScope.markupField != undefined && this.markupCanvas.vuforiaScope.markupField != '' ) {
-                this.markupCanvas.drawBoarder();
-                this.markupCanvas.vuforiaScope.markedupField =  this.markupCanvas.drawMarkupOntoImage();
-                let imageObj = new Object();
-                imageObj.image = this.markupCanvas.drawMarkupOntoImage();
-                this.markupCanvas.vuforiaScope.data.sessionimages.push(imageObj);
-                this.markupCanvas.vuforiaScope.sessionimagesField =  this.buildInfoTable(this.markupCanvas.vuforiaScope.data.sessionimages);
-                let contextArray = this.markupCanvas.vuforiaScope.markedupField.split(",");
-                this.markupCanvas.vuforiaScope.markedupdataField =  contextArray[1];
+
+                if (Number(this.markupCanvas.markupResizeScale) != undefined &&  this.markupCanvas.markupResizeScale != "") {
+                   // Scale image data
+
+
+                  let scale = Number(this.markupCanvas.markupResizeScale) / this.markupCanvas.canvasWidth; 
+
+                   this.markupCanvas.drawBoarder(Number(this.markupCanvas.markupResizeScale));
+                   this.markupCanvas.vuforiaScope.markedupField =  this.markupCanvas.scaleMarkupImage(scale);
+                   let imageObj = new Object();
+                   imageObj.image = this.markupCanvas.scaleMarkupImage(scale);
+                   this.markupCanvas.vuforiaScope.data.sessionimages.push(imageObj);
+                   this.markupCanvas.vuforiaScope.sessionimagesField =  this.buildInfoTable(this.markupCanvas.vuforiaScope.data.sessionimages);
+                   let contextArray = this.markupCanvas.vuforiaScope.markedupField.split(",");
+                   this.markupCanvas.vuforiaScope.markedupdataField =  contextArray[1];
+
+                } else {
+
+                    this.markupCanvas.drawBoarder(1);
+                    this.markupCanvas.vuforiaScope.markedupField =  this.markupCanvas.drawMarkupOntoImage();
+                    let imageObj = new Object();
+                    imageObj.image = this.markupCanvas.drawMarkupOntoImage();
+                    this.markupCanvas.vuforiaScope.data.sessionimages.push(imageObj);
+                    this.markupCanvas.vuforiaScope.sessionimagesField =  this.buildInfoTable(this.markupCanvas.vuforiaScope.data.sessionimages);
+                    let contextArray = this.markupCanvas.vuforiaScope.markedupField.split(",");
+                    this.markupCanvas.vuforiaScope.markedupdataField =  contextArray[1];
+
+                }
+
                 //this.markupCanvas.vuforiaScope.$parent.fireEvent('markCompleted');
                 this.markupCanvas.vuforiaScope.$parent.$applyAsync();
                 this.close();
@@ -740,13 +792,28 @@ class MarkupUI {
         //Append the div to the higher level div 
         UIContainer.appendChild(MarkupContainer);
         UIContainer.appendChild(MarkupToolbarContainer);
-        this.toggleSelectedColor (this.yellowspot);
         marker.src = "extensions/images/Markup_markerSelected.png";
         arrow.src = "extensions/images/Markup_arrow.png";
         //Append the div to the higher level div  
         this.CenterPanelSelector.appendChild(UIContainer);
-        this.markupCanvas.markupColor = "#fbc93d"; 
-        this.toggleSelectedColor (this.yellowspot);
+
+        if (this.markupCanvas.markupColor === "#000000" ) {
+            //black
+            this.toggleSelectedColor (this.blackspot);
+        } else if (this.markupCanvas.markupColor === "#FF0000") {
+            //red
+            this.toggleSelectedColor (this.redspot);
+        } else if (this.markupCanvas.markupColor === "#FFFF00") {
+            //yellow
+            this.toggleSelectedColor (this.yellowspot);
+        } else if (this.markupCanvas.markupColor === "#0000FF") {
+            //blue
+            this.toggleSelectedColor (this.bluespot);
+        } else {
+            this.markupCanvas.markupColor = "#FFFF00"; 
+            this.toggleSelectedColor (this.yellowspot);
+        }
+
         this.markupCanvas.markupType = "marker";
 
       return this.imgElement;

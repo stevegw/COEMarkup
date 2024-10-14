@@ -20,6 +20,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
         sessionimagesField: '=',
         includeborderField: '@',
         includedatestampField: '@',
+        markupcolorField: '@',
+        markupthicknessField: '@',
+        markupresizescaleField: '@',
         takenphotoField: '=',
         delegateField: '='
       },
@@ -63,7 +66,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
           }
           console.log('do the markup');
           if (!scope.data.disabled) {
-            let markup = new Markup(scope,scope.markupField ,  scope.includeborderField, scope.includedatestampField);
+            let markup = new Markup(scope,scope.markupField ,  scope.includeborderField, scope.includedatestampField , scope.markupcolorField, scope.markupthicknessField , scope.markupresizescaleField);
             scope.data.markedup = markup;
           } else {
             console.log('disabled');

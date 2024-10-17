@@ -557,85 +557,48 @@ class MarkupUI {
 
         var UIContainer = document.createElement('div');
         UIContainer.id = 'ui-container';
-        UIContainer.className = '';
-        UIContainer.style.position = "absolute"; //Allowed values: static, absolute, fixed, relative, sticky, initial, inherit;  
-        
-
-        UIContainer.style.top = "0px"; 
-        UIContainer.style.left = "0px";
+        UIContainer.className = 'ui-container';
         UIContainer.style.width = this.width;
         UIContainer.style.height = this.height;
-        UIContainer.style.backgroundColor = "transparent";
-        UIContainer.style.display = "flex";
-        UIContainer.style.flexDirection = "column";
-        UIContainer.style.zIndex =  '999';
 
         var MarkupToolbarContainer = document.createElement('div');
-        MarkupToolbarContainer.id = 'markup-toolbar--container'; 
-        MarkupToolbarContainer.style.position = "absolute";
-        MarkupToolbarContainer.style.width = this.width;
-        MarkupToolbarContainer.style.height = "50px";
-        MarkupToolbarContainer.style.backgroundColor = "transparent";
-        MarkupToolbarContainer.style.top = "2px";
+        MarkupToolbarContainer.id = 'markup-toolbar--container';
+        MarkupToolbarContainer.className = 'markup-toolbar';
   
 
         this.yellowspot = document.createElement('img');
         this.yellowspot.id = "yellow";
-        this.yellowspot.style.position = "absolute";
-        this.yellowspot.style.top = "2px";
-        this.yellowspot.style.left = "4px";
-        this.yellowspot.style.width = "40px";
-        this.yellowspot.style.height = "40px";
-        this.yellowspot.style.backgroundColor = "rgba(74,187,7)";
-        this.yellowspot.src = "extensions/images/Markup_yellowspot.png";
+        this.yellowspot.className = "yellow";
         MarkupToolbarContainer.appendChild(this.yellowspot);
     
         this.yellowspot.addEventListener("click",  () => { 
-            this.markupCanvas.markupColor = "#fbc93d"; 
+            this.markupCanvas.markupColor = "#f5b231";
             this.toggleSelectedColor (this.yellowspot);
         });
     
         this.redspot = document.createElement('img');
         this.redspot.id = "red";
-        this.redspot.style.position = "absolute";
-        this.redspot.style.top = "2px";
-        this.redspot.style.left = "44px";
-        this.redspot.setAttribute("height", "40px");
-        this.redspot.setAttribute("width", "40px");
-        this.redspot.style.backgroundColor = "rgba(74,187,7)";
-        this.redspot.src = "extensions/images/Markup_redspot.png";
+        this.redspot.className = "red";
         MarkupToolbarContainer.appendChild(this.redspot);
     
         this.redspot.addEventListener("click",  () => { 
-            this.markupCanvas.markupColor = "#fb4f4f";
+            this.markupCanvas.markupColor = "#ff4949";
             this.toggleSelectedColor (this.redspot);
         });
     
         this.bluespot = document.createElement('img');
         this.bluespot.id = "blue";
-        this.bluespot.style.position = "absolute";
-        this.bluespot.style.top = "2px";
-        this.bluespot.style.left = "84px";
-        this.bluespot.setAttribute("height", "40px");
-        this.bluespot.setAttribute("width", "40px");
-        this.bluespot.style.backgroundColor = "rgba(74,187,7)";
-        this.bluespot.src = "extensions/images/Markup_bluespot.png";
+        this.bluespot.className = "blue";
         MarkupToolbarContainer.appendChild(this.bluespot);
     
         this.bluespot.addEventListener("click",  () => { 
-            this.markupCanvas.markupColor = "#6cc0e5"; 
+            this.markupCanvas.markupColor = "#0babc7";
             this.toggleSelectedColor (this.bluespot);
         });
     
         this.blackspot = document.createElement('img');
         this.blackspot.id = "black";
-        this.blackspot.style.position = "absolute";
-        this.blackspot.style.top = "2px";
-        this.blackspot.style.left = "124px";
-        this.blackspot.style.backgroundColor = "rgba(74,187,7)";
-        this.blackspot.setAttribute("height", "40px");
-        this.blackspot.setAttribute("width", "40px");
-        this.blackspot.src = "extensions/images/Markup_blackspot.png";
+        this.blackspot.className = "black";
 
         MarkupToolbarContainer.appendChild(this.blackspot);
     
@@ -646,12 +609,7 @@ class MarkupUI {
     
         var marker = document.createElement('img');
         marker.style.position = "absolute";
-        marker.style.top = "2px";
-        marker.style.left = "164px";
-        marker.setAttribute("height", "40px");
-        marker.setAttribute("width", "40px");
-        marker.style.backgroundColor = "rgba(74,187,7)";
-        marker.src = "extensions/images/Markup_marker.png";
+        marker.className = "toolbarmarkerbutton";
         MarkupToolbarContainer.appendChild(marker);
     
         marker.addEventListener("click",  () => { 
@@ -662,13 +620,7 @@ class MarkupUI {
 
 
         var arrow = document.createElement('img');
-        arrow.style.position = "absolute";
-        arrow.style.top = "2px";
-        arrow.style.left = "204px";
-        arrow.setAttribute("height", "40px");
-        arrow.setAttribute("width", "40px");
-        arrow.style.backgroundColor = "rgba(74,187,7)";
-        arrow.src = "extensions/images/Markup_arrow.png";
+        arrow.className = "toolbararrowbutton";
         MarkupToolbarContainer.appendChild(arrow);
     
         arrow.addEventListener("click",  () => { 
@@ -680,13 +632,8 @@ class MarkupUI {
   
     
         var ResetButton = document.createElement('img');
-        ResetButton.style.position = "absolute";
-        ResetButton.style.top = "2px";
-        ResetButton.style.left = "244px";
-        ResetButton.style.height = "40px";
-        ResetButton.style.width = "40px";
+        ResetButton.className = "toolbarresetbutton";
         ResetButton.src = "extensions/images/Markup_reset.png";
-        ResetButton.style.backgroundColor = "rgba(74,187,7)";
         MarkupToolbarContainer.appendChild(ResetButton);
     
         ResetButton.addEventListener("click",  () => { 
@@ -704,14 +651,8 @@ class MarkupUI {
     
 
         var FinishButton = document.createElement('img');
-        FinishButton.style.height = "40px";
-        FinishButton.style.width = "40px";
-        FinishButton.style.position = "absolute";
-        FinishButton.style.top = "2px";
-        FinishButton.style.left = "294px";
+        FinishButton.className = "toolbarfinishbutton";
         FinishButton.src = "extensions/images/Markup_save.png";
-        FinishButton.style.backgroundColor = "rgba(74,187,7)";
-    
 
 
         FinishButton.addEventListener("click",  () => { 
@@ -737,13 +678,13 @@ class MarkupUI {
                 } else {
 
                     this.markupCanvas.drawBoarder(1);
-                    this.markupCanvas.vuforiaScope.markedupField =  this.markupCanvas.drawMarkupOntoImage();
-                    let imageObj = new Object();
-                    imageObj.image = this.markupCanvas.drawMarkupOntoImage();
-                    this.markupCanvas.vuforiaScope.data.sessionimages.push(imageObj);
-                    this.markupCanvas.vuforiaScope.sessionimagesField =  this.buildInfoTable(this.markupCanvas.vuforiaScope.data.sessionimages);
-                    let contextArray = this.markupCanvas.vuforiaScope.markedupField.split(",");
-                    this.markupCanvas.vuforiaScope.markedupdataField =  contextArray[1];
+                this.markupCanvas.vuforiaScope.markedupField =  this.markupCanvas.drawMarkupOntoImage();
+                let imageObj = new Object();
+                imageObj.image = this.markupCanvas.drawMarkupOntoImage();
+                this.markupCanvas.vuforiaScope.data.sessionimages.push(imageObj);
+                this.markupCanvas.vuforiaScope.sessionimagesField =  this.buildInfoTable(this.markupCanvas.vuforiaScope.data.sessionimages);
+                let contextArray = this.markupCanvas.vuforiaScope.markedupField.split(",");
+                this.markupCanvas.vuforiaScope.markedupdataField =  contextArray[1];
 
                 }
 
@@ -760,13 +701,8 @@ class MarkupUI {
 
 
         var CancelButton = document.createElement('img');
-        CancelButton.style.height = "40px";
-        CancelButton.style.width = "40px";
-        CancelButton.style.position = "absolute";
-        CancelButton.style.top = "2px";
-        CancelButton.style.left = "334px";
+        CancelButton.className = "toolbarcancelbutton";
         CancelButton.src = "extensions/images/Markup_cancel.png";
-        CancelButton.style.backgroundColor = "rgba(181,181,181)";
         CancelButton.addEventListener("click",  () => { 
 
 
@@ -792,6 +728,7 @@ class MarkupUI {
         //Append the div to the higher level div 
         UIContainer.appendChild(MarkupContainer);
         UIContainer.appendChild(MarkupToolbarContainer);
+        this.toggleSelectedColor (this.yellowspot);
         marker.src = "extensions/images/Markup_markerSelected.png";
         arrow.src = "extensions/images/Markup_arrow.png";
         //Append the div to the higher level div  
@@ -811,7 +748,7 @@ class MarkupUI {
             this.toggleSelectedColor (this.bluespot);
         } else {
             this.markupCanvas.markupColor = "#FFFF00"; 
-            this.toggleSelectedColor (this.yellowspot);
+        this.toggleSelectedColor (this.yellowspot);
         }
 
         this.markupCanvas.markupType = "marker";

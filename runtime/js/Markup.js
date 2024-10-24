@@ -35,8 +35,8 @@ class Markup {
         console.log("canvasWidth=" + canvasWidth + " canvasHeight=" + canvasHeight);
 
         let markupCanvas = new MarkupCanvas(vuforiaScope,canvasWidth,canvasHeight , includeborder, includedatestamp , markupColor , markupWidth , markupresizescale );
-        this.markupUI = new MarkupUI(markupCanvas, canvasWidth,canvasHeight ,imgsrc , );
-        markupCanvas.setupLens( imgsrc, this.markupUI.buildMarkUpUI());
+        this.markupUI = new MarkupUI(markupCanvas, canvasWidth,canvasHeight ,imgsrc  );
+        markupCanvas.setupLens( imgsrc, this.markupUI.buildMarkUpUI(this.markupType, this.markupColor));
 
 
 
@@ -331,7 +331,7 @@ class MarkupCanvas {
 
 
     setupLens ( backgroundLensimgsrc , imgElement) {
-      this.#markupType = "marker";
+      //this.#markupType = "marker";
       this.#backgroundLensimgsrc = backgroundLensimgsrc;
       this.#imgElement = imgElement;
       this.doLens();
@@ -476,6 +476,8 @@ class MarkupUI {
     width;
     height;
     markupType;
+    markupCurrentType;
+    markupCurrentColor;
 
     blackspot;
     redSpot;
@@ -494,6 +496,8 @@ class MarkupUI {
         this.height = height;
         this.imgsrc = imgsrc;
         this.markup = markup;
+        this.markupType ="marker";
+        this.markupColor = "#FFFF00";
 
     }
 
@@ -540,7 +544,7 @@ class MarkupUI {
 
     
 
-    buildMarkUpUI = function () {
+    buildMarkUpUI = function (markerType,  markerColor) {
 
         let CenterPanelQuery3D = 'body > ion-side-menus > ion-side-menu-content > ion-nav-view > ion-view > ion-content > twx-widget > twx-widget-content > \n' +
             'twx-container-content > twx-widget:nth-child(2) > twx-widget-content > div > twx-container-content > div.panel.body.undefined > div.panel.undefined.center';
@@ -572,7 +576,7 @@ class MarkupUI {
         MarkupToolbarContainer.appendChild(this.yellowspot);
     
         this.yellowspot.addEventListener("click",  () => { 
-            this.markupCanvas.markupColor = "#f5b231";
+            this.markupCanvas.markupColor = "#FFFF00";
             this.toggleSelectedColor (this.yellowspot);
         });
     
@@ -582,7 +586,7 @@ class MarkupUI {
         MarkupToolbarContainer.appendChild(this.redspot);
     
         this.redspot.addEventListener("click",  () => { 
-            this.markupCanvas.markupColor = "#ff4949";
+            this.markupCanvas.markupColor = "#FF0000";
             this.toggleSelectedColor (this.redspot);
         });
     
@@ -592,7 +596,7 @@ class MarkupUI {
         MarkupToolbarContainer.appendChild(this.bluespot);
     
         this.bluespot.addEventListener("click",  () => { 
-            this.markupCanvas.markupColor = "#0babc7";
+            this.markupCanvas.markupColor = "#0000FF";
             this.toggleSelectedColor (this.bluespot);
         });
     
@@ -645,7 +649,9 @@ class MarkupUI {
             // }
 
             UIContainer.innerHTML = "" ;
-            this.markupCanvas.setupLens( this.imgsrc, this.buildMarkUpUI());
+            var currentMarkerColor = this.markupCanvas.markupColor;
+            var currentMarkerType = this.markupCanvas.markupType;
+            this.markupCanvas.setupLens( this.imgsrc, this.buildMarkUpUI(currentMarkerType, currentMarkerColor));
     
         });
     
@@ -729,29 +735,38 @@ class MarkupUI {
         UIContainer.appendChild(MarkupContainer);
         UIContainer.appendChild(MarkupToolbarContainer);
         this.toggleSelectedColor (this.yellowspot);
-        marker.src = "extensions/images/Markup_markerSelected.png";
-        arrow.src = "extensions/images/Markup_arrow.png";
+        if (markerType === "arrow") {
+            this.markupCanvas.markupType = "arrow";
+            arrow.src = "extensions/images/Markup_arrowSelected.png";
+            marker.src = "extensions/images/Markup_marker.png";
+        } else {
+            this.markupCanvas.markupType = "marker";
+            marker.src = "extensions/images/Markup_markerSelected.png";
+            arrow.src = "extensions/images/Markup_arrow.png";
+
+        }
         //Append the div to the higher level div  
         this.CenterPanelSelector.appendChild(UIContainer);
 
-        if (this.markupCanvas.markupColor === "#000000" ) {
+        if (markerColor === "#000000" ) {
             //black
             this.toggleSelectedColor (this.blackspot);
-        } else if (this.markupCanvas.markupColor === "#FF0000") {
+        } else if (markerColor === "#FF0000") {
             //red
             this.toggleSelectedColor (this.redspot);
-        } else if (this.markupCanvas.markupColor === "#FFFF00") {
+        } else if (markerColor === "#FFFF00") {
             //yellow
             this.toggleSelectedColor (this.yellowspot);
-        } else if (this.markupCanvas.markupColor === "#0000FF") {
+        } else if (markerColor === "#0000FF") {
             //blue
             this.toggleSelectedColor (this.bluespot);
         } else {
+            //yellow default
             this.markupCanvas.markupColor = "#FFFF00"; 
-        this.toggleSelectedColor (this.yellowspot);
+            this.toggleSelectedColor (this.yellowspot);
         }
 
-        this.markupCanvas.markupType = "marker";
+        this.markupCanvas.markupType = markerType;
 
       return this.imgElement;
     }

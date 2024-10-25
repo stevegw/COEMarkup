@@ -546,9 +546,10 @@ class MarkupUI {
 
     buildMarkUpUI = function (markerType,  markerColor) {
 
-        let CenterPanelQuery3D = 'body > ion-side-menus > ion-side-menu-content > ion-nav-view > ion-view > ion-content > twx-widget > twx-widget-content > \n' +
-            'twx-container-content > twx-widget:nth-child(2) > twx-widget-content > div > twx-container-content > div.panel.body.undefined > div.panel.undefined.center';
+        //let CenterPanelQuery3D = 'body > ion-side-menus > ion-side-menu-content > ion-nav-view > ion-view > ion-content > twx-widget > twx-widget-content > \n' +
+        //    'twx-container-content > twx-widget:nth-child(2) > twx-widget-content > div > twx-container-content > div.panel.body.undefined > div.panel.undefined.center';
     
+        let CenterPanelQuery3D ='.twx-2d-overlay';
         let CenterPanelQuery2D = '.twx-view-overlay';
         let query3D  = document.querySelector(CenterPanelQuery3D);
         let query2D  = document.querySelector(CenterPanelQuery2D);

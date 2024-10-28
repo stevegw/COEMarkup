@@ -33,7 +33,6 @@ class Markup {
         }
 
         console.log("canvasWidth=" + canvasWidth + " canvasHeight=" + canvasHeight);
-
         let markupCanvas = new MarkupCanvas(vuforiaScope,canvasWidth,canvasHeight , includeborder, includedatestamp , markupColor , markupWidth , markupresizescale );
         this.markupUI = new MarkupUI(markupCanvas, canvasWidth,canvasHeight ,imgsrc  );
         markupCanvas.setupLens( imgsrc, this.markupUI.buildMarkUpUI(this.markupType, this.markupColor));
@@ -642,13 +641,6 @@ class MarkupUI {
         MarkupToolbarContainer.appendChild(ResetButton);
     
         ResetButton.addEventListener("click",  () => { 
-
-            // try { 
-            //     this.markupCanvas.vuforiaScope.$parent.fireEvent('markCancelled');
-            // } catch (ex) {
-
-            // }
-
             UIContainer.innerHTML = "" ;
             var currentMarkerColor = this.markupCanvas.markupColor;
             var currentMarkerType = this.markupCanvas.markupType;
@@ -685,38 +677,27 @@ class MarkupUI {
                 } else {
 
                     this.markupCanvas.drawBoarder(1);
-                this.markupCanvas.vuforiaScope.markedupField =  this.markupCanvas.drawMarkupOntoImage();
-                let imageObj = new Object();
-                imageObj.image = this.markupCanvas.drawMarkupOntoImage();
-                this.markupCanvas.vuforiaScope.data.sessionimages.push(imageObj);
-                this.markupCanvas.vuforiaScope.sessionimagesField =  this.buildInfoTable(this.markupCanvas.vuforiaScope.data.sessionimages);
-                let contextArray = this.markupCanvas.vuforiaScope.markedupField.split(",");
-                this.markupCanvas.vuforiaScope.markedupdataField =  contextArray[1];
+                    this.markupCanvas.vuforiaScope.markedupField =  this.markupCanvas.drawMarkupOntoImage();
+                    let imageObj = new Object();
+                    imageObj.image = this.markupCanvas.drawMarkupOntoImage();
+                    this.markupCanvas.vuforiaScope.data.sessionimages.push(imageObj);
+                    this.markupCanvas.vuforiaScope.sessionimagesField =  this.buildInfoTable(this.markupCanvas.vuforiaScope.data.sessionimages);
+                    let contextArray = this.markupCanvas.vuforiaScope.markedupField.split(",");
+                    this.markupCanvas.vuforiaScope.markedupdataField =  contextArray[1];
 
                 }
-
-                //this.markupCanvas.vuforiaScope.$parent.fireEvent('markCompleted');
                 this.markupCanvas.vuforiaScope.$parent.$applyAsync();
-                this.close();
+                this.close("FINISHED");
                 //const myTimeout = setTimeout( this.markupCanvas.vuforiaScope.$parent.fireEvent('markCompleted'), 500);
-
-
             }
         });
 
         MarkupToolbarContainer.appendChild(FinishButton);
-
-
-        var CancelButton = document.createElement('img');
-        CancelButton.className = "toolbarcancelbutton";
-        CancelButton.src = "extensions/images/Markup_cancel.png";
-        CancelButton.addEventListener("click",  () => { 
-
-
-            this.close();
-
-
-            //this.CenterPanelSelector.removeChild(UIContainer);
+            var CancelButton = document.createElement('img');
+            CancelButton.className = "toolbarcancelbutton";
+            CancelButton.src = "extensions/images/Markup_cancel.png";
+            CancelButton.addEventListener("click",  () => { 
+            this.close("CANCELLED");
     
         });
 
@@ -772,18 +753,30 @@ class MarkupUI {
       return this.imgElement;
     }
 
-    close () {
+    close (action) {
 
         try { 
+                let CenterPanelQuery3D ='.twx-2d-overlay';
+                let query3D  = document.querySelector(CenterPanelQuery3D);
+                let CenterPanelQuery2D = '.twx-view-overlay';
+                let query2D  = document.querySelector(CenterPanelQuery2D);
 
+                let element = document.getElementById("ui-container");
+                if (query3D && element) {
+                  //element.style.display = "none";
+                  query3D.removeChild(element);
+                } else if (query2D && element) {
+                    query2D.removeChild(element);
+                }
 
-            while (this.CenterPanelSelector.hasChildNodes()) {
-                this.CenterPanelSelector.removeChild(this.CenterPanelSelector.firstChild);
-              }
+                if (action === "FINISIHED") {
+                    this.markupCanvas.vuforiaScope.$parent.fireEvent('markCompleted');
+                } else if (action === "CANCELLED") {
+                    this.markupCanvas.vuforiaScope.$parent.fireEvent('markCancelled');
+                }
 
-            this.markupCanvas.vuforiaScope.$parent.fireEvent('markCancelled');
         } catch (ex) {
-
+            alert("Issue in closing UI "+ ex);
         }
       
       }

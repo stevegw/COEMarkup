@@ -26,7 +26,7 @@
 
         {
           name: 'autolaunch',
-          label: 'Auto lauch if incoming Image URL set',
+          label: 'Auto launch if incoming Image URL set',
           datatype: 'boolean',
           default: true,
           isBindingTarget: true,
@@ -74,7 +74,7 @@
         },
         {
           name: 'markupcolor',
-          label: 'pen color',
+          label: 'Pen color',
           datatype: 'select',
           default: '#FFFF00', 
           editor: 'select',
@@ -90,7 +90,7 @@
         },
         {
           name: 'markupresizescale',
-          label: 'pixel resize width',
+          label: 'Pixel resize width',
           datatype: 'string',
           default: '',
           isBindingTarget: true,
@@ -118,7 +118,7 @@
         },
         {
           name: 'takenphoto',
-          label: 'taken Photo Image URL',
+          label: 'Taken Photo Image URL',
           datatype: 'string',
           resource_url: false,
           default: '',
@@ -131,11 +131,11 @@
       services: [
         {
           name: 'start',
-          label: 'Start MarkUp'
+          label: 'Lauch MarkUp UI'
         },
         {
           name: 'takephoto',
-          label: 'Take Photo'
+          label: 'Take Photo without pause - instead of using camera 3,2,1'
         }
 
       ],

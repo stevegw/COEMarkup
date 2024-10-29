@@ -17,9 +17,22 @@ class Markup {
         // }
 
 
-        var canvasWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-        var canvasHeight = (window.innerHeight > 0) ? window.innerHeight : screen.height;
-   
+
+
+
+
+        var canvasWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width ;
+        var canvasHeight = (window.innerHeight > 0) ? window.innerHeight : screen.height ;
+        // Check for view menu that has a class title title-center header-item
+        // let viewmenuoffset = 0;
+        // let viewMenu  = document.querySelector(".left-buttons");
+
+
+        // if (viewMenu) {
+        //     viewmenuoffset = 50;
+        // } 
+        //canvasHeight = canvasHeight - viewmenuoffset;
+
         if (  String(markupColor).toLowerCase === "black" || markupColor === "#000000" ) {
             markupColor = "#000000";
         } else if (String(markupColor).toLowerCase === "red" || markupColor === "#FF0000") {
@@ -559,6 +572,8 @@ class MarkupUI {
             this.CenterPanelSelector = query2D;
         }
 
+
+
         var UIContainer = document.createElement('div');
         UIContainer.id = 'ui-container';
         UIContainer.className = 'ui-container';
@@ -568,7 +583,14 @@ class MarkupUI {
         var MarkupToolbarContainer = document.createElement('div');
         MarkupToolbarContainer.id = 'markup-toolbar--container';
         MarkupToolbarContainer.className = 'markup-toolbar';
-  
+        MarkupToolbarContainer.style.bottom = '20px';
+        let viewMenu  = document.querySelector(".left-buttons");
+        if (viewMenu) {
+            MarkupToolbarContainer.style.bottom = '70px';
+        } 
+
+
+        UIContainer.style.height = this.height;
 
         this.yellowspot = document.createElement('img');
         this.yellowspot.id = "yellow";
@@ -766,7 +788,7 @@ class MarkupUI {
                   //element.style.display = "none";
                   query3D.removeChild(element);
                 } else if (query2D && element) {
-                    query2D.removeChild(element);
+                  query2D.removeChild(element);
                 }
 
                 if (action === "FINISIHED") {

@@ -791,7 +791,7 @@ class MarkupUI {
                   query2D.removeChild(element);
                 }
 
-                if (action === "FINISIHED") {
+                if (action === "FINISHED") {
                     this.markupCanvas.vuforiaScope.$parent.fireEvent('markCompleted');
                 } else if (action === "CANCELLED") {
                     this.markupCanvas.vuforiaScope.$parent.fireEvent('markCancelled');

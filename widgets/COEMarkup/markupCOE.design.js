@@ -65,6 +65,16 @@
           showInput: false
         },
         {
+          name: 'takenphoto',
+          label: 'Auto taken Photo Image URL',
+          datatype: 'string',
+          resource_url: false,
+          default: '',
+          isBindingTarget: false,
+          isBindingSource: true,
+          showInput: false
+        },
+        {
           name: 'sessionimages',
           label: 'Session Images ',
           datatype: 'infotable',
@@ -115,28 +125,20 @@
           isBindingTarget: true,
           isBindingSource: false,
           showInput: true
-        },
-        {
-          name: 'takenphoto',
-          label: 'Taken Photo Image URL',
-          datatype: 'string',
-          resource_url: false,
-          default: '',
-          isBindingTarget: false,
-          isBindingSource: true,
-          showInput: false
         }
       ],
 
       services: [
         {
           name: 'start',
-          label: 'Lauch MarkUp UI'
-        },
-        {
-          name: 'takephoto',
-          label: 'Take Photo without pause - instead of using camera 3,2,1'
+          label: 'Start MarkUp'
         }
+        
+        // ,
+        // {
+        //   name: 'takephoto',
+        //   label: 'Take Photo without pause - instead of using camera 3,2,1'
+        // }
 
       ],
 
@@ -153,11 +155,13 @@
         {
           name: 'markCancelled',
           label: 'Markup cancelled'
-        },
-        {
-          name: 'photoTaken',
-          label: 'Photo Taken'
         }
+        
+        // ,
+        // {
+        //   name: 'photoTaken',
+        //   label: 'Photo Taken'
+        // }
 
       ],
 

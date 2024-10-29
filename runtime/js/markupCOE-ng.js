@@ -42,9 +42,11 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
 
         var photocallback = function (pngBase64String) {
 
-          scope.takenphotoField = 'data:image/png;base64,' + pngBase64String;        // define the size for the image widget
-          scope.$applyAsync();
-      
+          let photo = 'data:image/png;base64,' + pngBase64String;        // define the size for the image widget
+          scope.markupField =  photo;
+          let markup = new Markup(scope,photo ,  scope.includeborderField, scope.includedatestampField , scope.markupcolorField, scope.markupthicknessField , scope.markupresizescaleField);
+          scope.data.markedup = markup;
+
         };
       
       
@@ -71,12 +73,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
 
             if (incomingMarkup === undefined || incomingMarkup === "") {
               takeScreenShot(true); 
-
-                $timeout(function () {
-                  scope.markupField =  scope.takenphotoField;
-                  let markup = new Markup(scope,scope.markupField ,  scope.includeborderField, scope.includedatestampField , scope.markupcolorField, scope.markupthicknessField , scope.markupresizescaleField);
-                  scope.data.markedup = markup;
-                },500); 
             } else {
               let markup = new Markup(scope,scope.markupField ,  scope.includeborderField, scope.includedatestampField , scope.markupcolorField, scope.markupthicknessField , scope.markupresizescaleField);
               scope.data.markedup = markup;

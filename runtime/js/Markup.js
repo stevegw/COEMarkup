@@ -801,6 +801,8 @@ class MarkupUI {
                     this.markupCanvas.vuforiaScope.$parent.fireEvent('markCancelled');
                 }
 
+                this.markupCanvas.vuforiaScope.markupField = "";
+
         } catch (ex) {
             alert("Issue in closing UI "+ ex);
         }

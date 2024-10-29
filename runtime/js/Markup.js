@@ -778,17 +778,21 @@ class MarkupUI {
     close (action) {
 
         try { 
-                let CenterPanelQuery3D ='.twx-2d-overlay';
-                let query3D  = document.querySelector(CenterPanelQuery3D);
-                let CenterPanelQuery2D = '.twx-view-overlay';
-                let query2D  = document.querySelector(CenterPanelQuery2D);
+                let CenterPanelQuery3D ='twx-2d-overlay';
+                let query3D  = document.getElementsByClassName(CenterPanelQuery3D);
+                let CenterPanelQuery2D = 'twx-view-overlay';
+                let query2D  = document.getElementsByClassName(CenterPanelQuery2D);
 
                 let element = document.getElementById("ui-container");
-                if (query3D && element) {
-                  //element.style.display = "none";
-                  query3D.removeChild(element);
-                } else if (query2D && element) {
-                  query2D.removeChild(element);
+                if (query3D[0]) {
+                  const childElements = query3D[0].getElementsByClassName('ui-container');
+                  const childArray = Array.from(childElements);
+                  childArray.forEach(child => query3D[0].removeChild(child));
+
+                } else if (query2D[0] ) {
+                  const childElements = query2D[0].getElementsByClassName('ui-container');
+                  const childArray = Array.from(childElements);
+                  childArray.forEach(child => query2D[0].removeChild(child));
                 }
 
                 if (action === "FINISHED") {

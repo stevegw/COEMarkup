@@ -76,7 +76,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
                   scope.markupField =  scope.takenphotoField;
                   let markup = new Markup(scope,scope.markupField ,  scope.includeborderField, scope.includedatestampField , scope.markupcolorField, scope.markupthicknessField , scope.markupresizescaleField);
                   scope.data.markedup = markup;
-                },50); 
+                },500); 
             } else {
               let markup = new Markup(scope,scope.markupField ,  scope.includeborderField, scope.includedatestampField , scope.markupcolorField, scope.markupthicknessField , scope.markupresizescaleField);
               scope.data.markedup = markup;

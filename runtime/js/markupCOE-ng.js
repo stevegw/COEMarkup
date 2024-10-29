@@ -31,39 +31,40 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
 
         var lastUpdated = 'unknown';
 
-        scope.data = { name: undefined, 
-                   disabled: false, 
-                        src: undefined,
-                        markedup: undefined,
-                        sessionimages: []
-                     };
+        scope.data = {
+          name: undefined,
+          disabled: false,
+          src: undefined,
+          markedup: undefined,
+          sessionimages: []
+        };
 
         scope.renderer = $window.cordova ? vuforia : $injector.get('threeJsTmlRenderer');
 
         var photocallback = function (pngBase64String) {
 
           let photo = 'data:image/png;base64,' + pngBase64String;        // define the size for the image widget
-          scope.markupField =  photo;
-          let markup = new Markup(scope,photo ,  scope.includeborderField, scope.includedatestampField , scope.markupcolorField, scope.markupthicknessField , scope.markupresizescaleField);
+          scope.markupField = photo;
+          let markup = new Markup(scope, photo, scope.includeborderField, scope.includedatestampField, scope.markupcolorField, scope.markupthicknessField, scope.markupresizescaleField);
           scope.data.markedup = markup;
 
         };
-      
-      
-        var takeScreenShot = function(showAugmentation ) {
-          var params = {withAugmentation: showAugmentation};
+
+
+        var takeScreenShot = function (showAugmentation) {
+          var params = { withAugmentation: showAugmentation };
           scope.renderer.takeScreenshot(params, photocallback, null);
-      
-          }
-      
-                     
-        var executeMarkup = function() {
+
+        }
+
+
+        var executeMarkup = function () {
           console.log('Starting markup');
           if (scope.data.markedup != undefined) {
             try {
               scope.data.markedup.MarkupUI.close();
-            }catch(ex) {
-                // ignore
+            } catch (ex) {
+              // ignore
             }
           }
 
@@ -72,9 +73,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
             let incomingMarkup = scope.markupField;
 
             if (incomingMarkup === undefined || incomingMarkup === "") {
-              takeScreenShot(true); 
+              takeScreenShot(true);
             } else {
-              let markup = new Markup(scope,scope.markupField ,  scope.includeborderField, scope.includedatestampField , scope.markupcolorField, scope.markupthicknessField , scope.markupresizescaleField);
+              let markup = new Markup(scope, scope.markupField, scope.includeborderField, scope.includedatestampField, scope.markupcolorField, scope.markupthicknessField, scope.markupresizescaleField);
               scope.data.markedup = markup;
 
             }
@@ -89,19 +90,19 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
           takeScreenShot(true);
         }
 
-        
-        var start = function() {
+
+        var start = function () {
           console.log('Starting markup');
           scope.data.disabled = false;
           scope.$parent.fireEvent('markStart');
           executeMarkup();
         }
-        var takephoto = function() {
+        var takephoto = function () {
           console.log('Starting takephoto');
           scope.data.disabled = false;
           executeTakePhoto();
           scope.$parent.fireEvent('photoTaken');
-          
+
         }
 
         scope.$watch('markedupField', function () {
@@ -113,14 +114,13 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
 
         });
 
-        // markedupdataField
         scope.$watch('markedupdataField', function () {
           console.log('markedupdataField changed');
           scope.$parent.$applyAsync();
           if (scope.markedupdataField != undefined && scope.markedupdataField != "") {
             $timeout(function () {
               scope.$parent.fireEvent('markCompleted');
-            },50); 
+            }, 50);
           }
 
 
@@ -139,23 +139,22 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
         });
 
         scope.$watch('takenphotoField', function () {
-         // console.log('takenphotoField ' + scope.takenphotoField );
-
+          // add any logging when testing here
         });
 
         scope.$watch('delegateField', function (delegate) {
           if (delegate) {
-            delegate.start = function () { 
-              start(); 
+            delegate.start = function () {
+              start();
             };
-            delegate.takephoto = function () { 
-              takephoto(); 
+            delegate.takephoto = function () {
+              takephoto();
             };
 
           }
         });
 
-        // Use this initially to see if your extension get deployed
+        // Use this initially to see if your extension gets deployed
         // If you don't see this message its not deployed
         // Comment out once you have it working
         // scope.$watch( function() {

@@ -2,38 +2,12 @@ class Markup {
 
     markupUI;
 
-    constructor( vuforiaScope, imgsrc, includeborder, includedatestamp , markupColor ,markupWidth='5' , markupresizescale  ) {
+    constructor(vuforiaScope, imgsrc, includeborder, includedatestamp, markupColor, markupWidth = '5', markupresizescale) {
 
-        // let orientation = (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation;
+        var canvasWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+        var canvasHeight = (window.innerHeight > 0) ? window.innerHeight : screen.height;
 
-        // if (orientation === "landscape-primary") {
-        // console.log("That looks good.");
-        // } else if (orientation === "landscape-secondary") {
-        // console.log("Mmmh... the screen is upside down!");
-        // } else if (orientation === "portrait-secondary" || orientation === "portrait-primary") {
-        // console.log("Mmmh... you should rotate your device to landscape");
-        // } else if (orientation === undefined) {
-        // console.log("The orientation API isn't supported in this browser :(");
-        // }
-
-
-
-
-
-
-        var canvasWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width ;
-        var canvasHeight = (window.innerHeight > 0) ? window.innerHeight : screen.height ;
-        // Check for view menu that has a class title title-center header-item
-        // let viewmenuoffset = 0;
-        // let viewMenu  = document.querySelector(".left-buttons");
-
-
-        // if (viewMenu) {
-        //     viewmenuoffset = 50;
-        // } 
-        //canvasHeight = canvasHeight - viewmenuoffset;
-
-        if (  String(markupColor).toLowerCase === "black" || markupColor === "#000000" ) {
+        if (String(markupColor).toLowerCase === "black" || markupColor === "#000000") {
             markupColor = "#000000";
         } else if (String(markupColor).toLowerCase === "red" || markupColor === "#FF0000") {
             markupColor = "#FF0000";
@@ -46,15 +20,12 @@ class Markup {
         }
 
         console.log("canvasWidth=" + canvasWidth + " canvasHeight=" + canvasHeight);
-        let markupCanvas = new MarkupCanvas(vuforiaScope,canvasWidth,canvasHeight , includeborder, includedatestamp , markupColor , markupWidth , markupresizescale );
-        this.markupUI = new MarkupUI(markupCanvas, canvasWidth,canvasHeight ,imgsrc  );
-        markupCanvas.setupLens( imgsrc, this.markupUI.buildMarkUpUI(this.markupType, this.markupColor));
-
+        let markupCanvas = new MarkupCanvas(vuforiaScope, canvasWidth, canvasHeight, includeborder, includedatestamp, markupColor, markupWidth, markupresizescale);
+        this.markupUI = new MarkupUI(markupCanvas, canvasWidth, canvasHeight, imgsrc);
+        markupCanvas.setupLens(imgsrc, this.markupUI.buildMarkUpUI(this.markupType, this.markupColor));
 
 
     }
-
-
 
 
 }
@@ -81,16 +52,16 @@ class MarkupCanvas {
     #startY;
     #savedCanvas;
     #offset;
- 
-    constructor( vuforiaScope, canvasWidth , canvasHeight, includeborder, includedatestamp,   markupColor , markupWidth , markupResizeScale ) {
+
+    constructor(vuforiaScope, canvasWidth, canvasHeight, includeborder, includedatestamp, markupColor, markupWidth, markupResizeScale) {
 
 
-        this.matchMedia  = window.matchMedia("(orientation: portrait)");
+        this.matchMedia = window.matchMedia("(orientation: portrait)");
 
-        if(this.matchMedia.media !=  "(orientation: portrait)"){
+        if (this.matchMedia.media != "(orientation: portrait)") {
             alert("Please use Landscape Orientation ");
             return;
-        } 
+        }
 
         this.#offset = 0;
         this.#vuforiaScope = vuforiaScope;
@@ -98,7 +69,7 @@ class MarkupCanvas {
         this.#canvasHeight = canvasHeight - (2 * this.#offset);
         this.#markupWidth = markupWidth;
         this.#markupResizeScale = markupResizeScale;
-        
+
         this.#includeborder = includeborder;
         this.#includedatestamp = includedatestamp;
 
@@ -107,9 +78,9 @@ class MarkupCanvas {
 
         this.#savedCanvas = document.createElement('canvas');
         this.#savedCanvas.width = this.#canvasWidth;
-        this.#savedCanvas.height = this.#canvasHeight;   
+        this.#savedCanvas.height = this.#canvasHeight;
         this.#savedCanvas.getContext("2d").clearRect(0, 0, this.#canvasWidth, this.#canvasHeight);
- 
+
 
 
     }
@@ -117,13 +88,13 @@ class MarkupCanvas {
     set vuforiaScope(vuforiaScope) {
 
         this.#vuforiaScope = vuforiaScope;
-        console.log(">>>>"+this.#vuforiaScope.app);
+        console.log(">>>>" + this.#vuforiaScope.app);
 
     }
 
     get vuforiaScope() {
 
-        return this.#vuforiaScope ;
+        return this.#vuforiaScope;
 
     }
 
@@ -218,7 +189,7 @@ class MarkupCanvas {
 
     }
 
-    set backgroundLensimgsrc (backgroundLensimgsrc) {
+    set backgroundLensimgsrc(backgroundLensimgsrc) {
         this.#backgroundLensimgsrc = backgroundLensimgsrc;
 
     }
@@ -244,7 +215,7 @@ class MarkupCanvas {
         return { x: x, y: y };
     }
 
-    doDraw(pos ) {
+    doDraw(pos) {
 
 
         this.#lensCanvas.getContext("2d").lineWidth = this.#markupWidth;
@@ -256,27 +227,23 @@ class MarkupCanvas {
             this.#lensCanvas.getContext("2d").clearRect(0, 0, this.#canvasWidth, this.#canvasHeight);
 
             try {
-                this.drawArrow(this.#lensCanvas.getContext("2d") , this.#startX, this.#startY,pos.x, pos.y);
-                
+                this.drawArrow(this.#lensCanvas.getContext("2d"), this.#startX, this.#startY, pos.x, pos.y);
+
             } catch (error) {
-                alert("Draw Arrow error "+ error);
+                alert("Draw Arrow error " + error);
             }
 
-        } else  {
+        } else {
 
             this.#lensCanvas.getContext("2d").lineTo(pos.x, pos.y);
             this.#lensCanvas.getContext("2d").stroke();
-  
+
         }
 
     }
 
 
-
-
-
     // arrow = shaft + tip
-    //
     // t argument indicates in % how big should be shaft part in drawn arrow
     // t should be in range from 0 to 1
     // t can be interpreted as: t = shaftLength / arrowLength
@@ -286,7 +253,7 @@ class MarkupCanvas {
             dx: x2 - x1,
             dy: y2 - y1
         };
-            const middle = {
+        const middle = {
             x: arrow.dx * t + x1,
             y: arrow.dy * t + y1
         };
@@ -294,7 +261,7 @@ class MarkupCanvas {
             dx: x2 - middle.x,
             dy: y2 - middle.y
         };
-  
+
         context.beginPath();
         context.moveTo(x1, y1);
         context.lineTo(middle.x, middle.y);
@@ -303,10 +270,10 @@ class MarkupCanvas {
         context.lineTo(x2, y2);
         context.closePath();
         context.stroke();
-       
+
     };
 
-    drawBoarder =  (scale) => {
+    drawBoarder = (scale) => {
 
 
         let context = this.#lensCanvas.getContext("2d");
@@ -316,9 +283,9 @@ class MarkupCanvas {
             context.strokeStyle = 'rgba(73, 89, 53, 0.50)';
             context.beginPath();
             context.moveTo(0, 0);
-            context.lineTo(scale*(this.#canvasWidth), 0) ;
-            context.lineTo(scale*(this.#canvasWidth), scale*(this.#canvasHeight));
-            context.lineTo(0 , scale*(this.#canvasHeight));
+            context.lineTo(scale * (this.#canvasWidth), 0);
+            context.lineTo(scale * (this.#canvasWidth), scale * (this.#canvasHeight));
+            context.lineTo(0, scale * (this.#canvasHeight));
             context.lineTo(0, 0);
             context.stroke();
         }
@@ -332,7 +299,7 @@ class MarkupCanvas {
             var yyyy = today.getFullYear();
             var time = today.getHours() + ":" + today.getMinutes();
 
-            var today = mm + '/' + dd + '/' + yyyy + " "+ time;
+            var today = mm + '/' + dd + '/' + yyyy + " " + time;
             context.font = '30px serif';
             context.fillStyle = 'rgba(255, 213, 0, 0.5)';
             context.fillText(today, 10, 30);
@@ -342,15 +309,15 @@ class MarkupCanvas {
     }
 
 
-    setupLens ( backgroundLensimgsrc , imgElement) {
-      //this.#markupType = "marker";
-      this.#backgroundLensimgsrc = backgroundLensimgsrc;
-      this.#imgElement = imgElement;
-      this.doLens();
-  
+    setupLens(backgroundLensimgsrc, imgElement) {
+
+        this.#backgroundLensimgsrc = backgroundLensimgsrc;
+        this.#imgElement = imgElement;
+        this.doLens();
+
     }
 
-    clearLens (imgsrc) {
+    clearLens(imgsrc) {
 
         this.#backgroundLensimgsrc = imgsrc;
         this.doLens();
@@ -372,18 +339,15 @@ class MarkupCanvas {
             this.#lensCanvas = document.createElement('canvas');
             this.#lensCanvas.width = this.#canvasWidth;
             this.#lensCanvas.height = this.#canvasHeight;
-            
+
             this.#lensCanvas.getContext("2d").clearRect(0, 0, this.#canvasWidth, this.#canvasHeight);
             this.lens.appendChild(this.#lensCanvas);
 
-           // this.lens.setAttribute("class", "img-zoom-lens");
             this.lens.style.left = 0 + "px";
             this.lens.style.top = 0 + "px";
             this.lens.style.width = this.#canvasWidth;
             this.lens.style.height = this.#canvasHeight;
             this.lens.style.position = 'absolute';
-            // this.lens.style.border = '5px solid #d4d4d4';
-
             this.#imgElement.parentElement.insertBefore(this.lens, this.#imgElement);
 
             this.lens.addEventListener("mousedown", (e) => {
@@ -399,7 +363,7 @@ class MarkupCanvas {
                 this.#lensCanvas.getContext("2d").stroke();
                 this.#lensCanvas.getContext("2d").beginPath();
 
-                this.#imgElement.src =  this.drawMarkupOntoImage();
+                this.#imgElement.src = this.drawMarkupOntoImage();
                 this.#backgroundLensimgsrc = this.#imgElement.src;
                 this.doLens();
 
@@ -426,7 +390,7 @@ class MarkupCanvas {
                 this.#lensCanvas.getContext("2d").stroke();
                 this.#lensCanvas.getContext("2d").beginPath();
 
-                this.#imgElement.src =  this.drawMarkupOntoImage();
+                this.#imgElement.src = this.drawMarkupOntoImage();
                 this.#backgroundLensimgsrc = this.#imgElement.src;
                 this.doLens();
 
@@ -439,12 +403,12 @@ class MarkupCanvas {
                 }
                 let x = e.touches[0].screenX;
                 let y = e.touches[0].screenY;
-                //let pos = this.getCursorPos(e);
-                this.doDraw({x:x, y:y});
- 
+
+                this.doDraw({ x: x, y: y });
+
 
             });
-   
+
 
         }
     }
@@ -459,7 +423,7 @@ class MarkupCanvas {
         ctx.globalCompositeOperation = 'destination-over';
         ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, this.#canvasWidth, this.#canvasHeight);
         ctx.globalCompositeOperation = 'source-over';
-        return  this.#lensCanvas.toDataURL();
+        return this.#lensCanvas.toDataURL();
 
     }
 
@@ -470,9 +434,9 @@ class MarkupCanvas {
         image.src = this.#backgroundLensimgsrc;
 
         ctx.globalCompositeOperation = 'destination-over';
-        ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, scale*(this.#canvasWidth), scale*(this.#canvasHeight));
+        ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, scale * (this.#canvasWidth), scale * (this.#canvasHeight));
         ctx.globalCompositeOperation = 'source-over';
-        return  this.#lensCanvas.toDataURL();
+        return this.#lensCanvas.toDataURL();
 
     }
 
@@ -501,22 +465,22 @@ class MarkupUI {
 
 
 
-    constructor( canvas, width, height , imgsrc , markup) {
+    constructor(canvas, width, height, imgsrc, markup) {
 
         this.markupCanvas = canvas;
         this.width = width;
         this.height = height;
         this.imgsrc = imgsrc;
         this.markup = markup;
-        this.markupType ="marker";
+        this.markupType = "marker";
         this.markupColor = "#FFFF00";
 
     }
 
- 
 
 
-    toggleSelectedColor (element) {
+
+    toggleSelectedColor(element) {
 
         this.blackspot.src = "extensions/images/Markup_blackspot.png";
         this.yellowspot.src = "extensions/images/Markup_yellowspot.png";
@@ -539,32 +503,29 @@ class MarkupUI {
 
     //
     // This was created in the hope that a data grid widget would except the data from local endpoint
-    // currentlt a Datagrid only excepts THX endpoints.
-    // I could remove this but maybe in the future it will work
+    // currently a Datagrid only excepts THX endpoints.
+    // I could remove this but keeping 
     //
-    buildInfoTable= function (rows) {
-        var itable = { 
-                rows: rows,
-          dataShape: {
-            fieldDefinitions: {
-                image: {aspects: {}, baseType: "STRING",  name: "value"   }
+    buildInfoTable = function (rows) {
+        var itable = {
+            rows: rows,
+            dataShape: {
+                fieldDefinitions: {
+                    image: { aspects: {}, baseType: "STRING", name: "value" }
+                }
             }
-          }
-        };     
+        };
         return itable;
-      }
+    }
 
-    
 
-    buildMarkUpUI = function (markerType,  markerColor) {
 
-        //let CenterPanelQuery3D = 'body > ion-side-menus > ion-side-menu-content > ion-nav-view > ion-view > ion-content > twx-widget > twx-widget-content > \n' +
-        //    'twx-container-content > twx-widget:nth-child(2) > twx-widget-content > div > twx-container-content > div.panel.body.undefined > div.panel.undefined.center';
-    
-        let CenterPanelQuery3D ='.twx-2d-overlay';
+    buildMarkUpUI = function (markerType, markerColor) {
+
+        let CenterPanelQuery3D = '.twx-2d-overlay';
         let CenterPanelQuery2D = '.twx-view-overlay';
-        let query3D  = document.querySelector(CenterPanelQuery3D);
-        let query2D  = document.querySelector(CenterPanelQuery2D);
+        let query3D = document.querySelector(CenterPanelQuery3D);
+        let query2D = document.querySelector(CenterPanelQuery2D);
 
         if (query3D != undefined) {
             this.CenterPanelSelector = query3D;
@@ -584,10 +545,10 @@ class MarkupUI {
         MarkupToolbarContainer.id = 'markup-toolbar--container';
         MarkupToolbarContainer.className = 'markup-toolbar';
         MarkupToolbarContainer.style.bottom = '20px';
-        let viewMenu  = document.querySelector(".left-buttons");
+        let viewMenu = document.querySelector(".left-buttons");
         if (viewMenu) {
             MarkupToolbarContainer.style.bottom = '70px';
-        } 
+        }
 
 
         UIContainer.style.height = this.height;
@@ -596,50 +557,50 @@ class MarkupUI {
         this.yellowspot.id = "yellow";
         this.yellowspot.className = "yellow";
         MarkupToolbarContainer.appendChild(this.yellowspot);
-    
-        this.yellowspot.addEventListener("click",  () => { 
+
+        this.yellowspot.addEventListener("click", () => {
             this.markupCanvas.markupColor = "#FFFF00";
-            this.toggleSelectedColor (this.yellowspot);
+            this.toggleSelectedColor(this.yellowspot);
         });
-    
+
         this.redspot = document.createElement('img');
         this.redspot.id = "red";
         this.redspot.className = "red";
         MarkupToolbarContainer.appendChild(this.redspot);
-    
-        this.redspot.addEventListener("click",  () => { 
+
+        this.redspot.addEventListener("click", () => {
             this.markupCanvas.markupColor = "#FF0000";
-            this.toggleSelectedColor (this.redspot);
+            this.toggleSelectedColor(this.redspot);
         });
-    
+
         this.bluespot = document.createElement('img');
         this.bluespot.id = "blue";
         this.bluespot.className = "blue";
         MarkupToolbarContainer.appendChild(this.bluespot);
-    
-        this.bluespot.addEventListener("click",  () => { 
+
+        this.bluespot.addEventListener("click", () => {
             this.markupCanvas.markupColor = "#0000FF";
-            this.toggleSelectedColor (this.bluespot);
+            this.toggleSelectedColor(this.bluespot);
         });
-    
+
         this.blackspot = document.createElement('img');
         this.blackspot.id = "black";
         this.blackspot.className = "black";
 
         MarkupToolbarContainer.appendChild(this.blackspot);
-    
-        this.blackspot.addEventListener("click", () => { 
-            this.markupCanvas.markupColor = "#000000"; 
-            this.toggleSelectedColor (this.blackspot);
+
+        this.blackspot.addEventListener("click", () => {
+            this.markupCanvas.markupColor = "#000000";
+            this.toggleSelectedColor(this.blackspot);
         });
-    
+
         var marker = document.createElement('img');
         marker.style.position = "absolute";
         marker.className = "toolbarmarkerbutton";
         MarkupToolbarContainer.appendChild(marker);
-    
-        marker.addEventListener("click",  () => { 
-            this.markupCanvas.markupType = "marker"; 
+
+        marker.addEventListener("click", () => {
+            this.markupCanvas.markupType = "marker";
             marker.src = "extensions/images/Markup_markerSelected.png";
             arrow.src = "extensions/images/Markup_arrow.png";
         });
@@ -648,79 +609,77 @@ class MarkupUI {
         var arrow = document.createElement('img');
         arrow.className = "toolbararrowbutton";
         MarkupToolbarContainer.appendChild(arrow);
-    
-        arrow.addEventListener("click",  () => { 
+
+        arrow.addEventListener("click", () => {
             this.markupCanvas.markupType = "arrow";
             marker.src = "extensions/images/Markup_marker.png";
             arrow.src = "extensions/images/Markup_arrowSelected.png";
         });
 
-  
-    
+
+
         var ResetButton = document.createElement('img');
         ResetButton.className = "toolbarresetbutton";
         ResetButton.src = "extensions/images/Markup_reset.png";
         MarkupToolbarContainer.appendChild(ResetButton);
-    
-        ResetButton.addEventListener("click",  () => { 
-            UIContainer.innerHTML = "" ;
+
+        ResetButton.addEventListener("click", () => {
+            UIContainer.innerHTML = "";
             var currentMarkerColor = this.markupCanvas.markupColor;
             var currentMarkerType = this.markupCanvas.markupType;
-            this.markupCanvas.setupLens( this.imgsrc, this.buildMarkUpUI(currentMarkerType, currentMarkerColor));
-    
+            this.markupCanvas.setupLens(this.imgsrc, this.buildMarkUpUI(currentMarkerType, currentMarkerColor));
+
         });
-    
+
 
         var FinishButton = document.createElement('img');
         FinishButton.className = "toolbarfinishbutton";
         FinishButton.src = "extensions/images/Markup_save.png";
 
 
-        FinishButton.addEventListener("click",  () => { 
-            UIContainer.innerHTML = "" ;
+        FinishButton.addEventListener("click", () => {
+            UIContainer.innerHTML = "";
 
-            if (this.markupCanvas.vuforiaScope.markupField != undefined && this.markupCanvas.vuforiaScope.markupField != '' ) {
+            if (this.markupCanvas.vuforiaScope.markupField != undefined && this.markupCanvas.vuforiaScope.markupField != '') {
 
-                if (Number(this.markupCanvas.markupResizeScale) != undefined &&  this.markupCanvas.markupResizeScale != "") {
-                   // Scale image data
+                if (Number(this.markupCanvas.markupResizeScale) != undefined && this.markupCanvas.markupResizeScale != "") {
+                    // Scale image data
+                    let scale = Number(this.markupCanvas.markupResizeScale) / this.markupCanvas.canvasWidth;
 
-
-                  let scale = Number(this.markupCanvas.markupResizeScale) / this.markupCanvas.canvasWidth; 
-
-                   this.markupCanvas.drawBoarder(Number(this.markupCanvas.markupResizeScale));
-                   this.markupCanvas.vuforiaScope.markedupField =  this.markupCanvas.scaleMarkupImage(scale);
-                   let imageObj = new Object();
-                   imageObj.image = this.markupCanvas.scaleMarkupImage(scale);
-                   this.markupCanvas.vuforiaScope.data.sessionimages.push(imageObj);
-                   this.markupCanvas.vuforiaScope.sessionimagesField =  this.buildInfoTable(this.markupCanvas.vuforiaScope.data.sessionimages);
-                   let contextArray = this.markupCanvas.vuforiaScope.markedupField.split(",");
-                   this.markupCanvas.vuforiaScope.markedupdataField =  contextArray[1];
+                    this.markupCanvas.drawBoarder(Number(this.markupCanvas.markupResizeScale));
+                    this.markupCanvas.vuforiaScope.markedupField = this.markupCanvas.scaleMarkupImage(scale);
+                    let imageObj = new Object();
+                    imageObj.image = this.markupCanvas.scaleMarkupImage(scale);
+                    this.markupCanvas.vuforiaScope.data.sessionimages.push(imageObj);
+                    this.markupCanvas.vuforiaScope.sessionimagesField = this.buildInfoTable(this.markupCanvas.vuforiaScope.data.sessionimages);
+                    let contextArray = this.markupCanvas.vuforiaScope.markedupField.split(",");
+                    this.markupCanvas.vuforiaScope.markedupdataField = contextArray[1];
 
                 } else {
 
                     this.markupCanvas.drawBoarder(1);
-                    this.markupCanvas.vuforiaScope.markedupField =  this.markupCanvas.drawMarkupOntoImage();
+                    this.markupCanvas.vuforiaScope.markedupField = this.markupCanvas.drawMarkupOntoImage();
                     let imageObj = new Object();
                     imageObj.image = this.markupCanvas.drawMarkupOntoImage();
                     this.markupCanvas.vuforiaScope.data.sessionimages.push(imageObj);
-                    this.markupCanvas.vuforiaScope.sessionimagesField =  this.buildInfoTable(this.markupCanvas.vuforiaScope.data.sessionimages);
+                    this.markupCanvas.vuforiaScope.sessionimagesField = this.buildInfoTable(this.markupCanvas.vuforiaScope.data.sessionimages);
                     let contextArray = this.markupCanvas.vuforiaScope.markedupField.split(",");
-                    this.markupCanvas.vuforiaScope.markedupdataField =  contextArray[1];
+                    this.markupCanvas.vuforiaScope.markedupdataField = contextArray[1];
 
                 }
                 this.markupCanvas.vuforiaScope.$parent.$applyAsync();
                 this.close("FINISHED");
-                //const myTimeout = setTimeout( this.markupCanvas.vuforiaScope.$parent.fireEvent('markCompleted'), 500);
+
             }
         });
 
         MarkupToolbarContainer.appendChild(FinishButton);
-            var CancelButton = document.createElement('img');
-            CancelButton.className = "toolbarcancelbutton";
-            CancelButton.src = "extensions/images/Markup_cancel.png";
-            CancelButton.addEventListener("click",  () => { 
+        var CancelButton = document.createElement('img');
+        CancelButton.className = "toolbarcancelbutton";
+        CancelButton.src = "extensions/images/Markup_cancel.png";
+        CancelButton.addEventListener("click", () => {
             this.close("CANCELLED");
-    
+
         });
 
         MarkupToolbarContainer.appendChild(CancelButton);
@@ -733,12 +692,12 @@ class MarkupUI {
         this.imgElement.setAttribute("width", this.width);
         this.imgElement.setAttribute("height", this.height);
         this.imgElement.src = this.imgsrc;
-  
+
         MarkupContainer.appendChild(this.imgElement);
         //Append the div to the higher level div 
         UIContainer.appendChild(MarkupContainer);
         UIContainer.appendChild(MarkupToolbarContainer);
-        this.toggleSelectedColor (this.yellowspot);
+        this.toggleSelectedColor(this.yellowspot);
         if (markerType === "arrow") {
             this.markupCanvas.markupType = "arrow";
             arrow.src = "extensions/images/Markup_arrowSelected.png";
@@ -752,62 +711,62 @@ class MarkupUI {
         //Append the div to the higher level div  
         this.CenterPanelSelector.appendChild(UIContainer);
 
-        if (markerColor === "#000000" ) {
+        if (markerColor === "#000000") {
             //black
-            this.toggleSelectedColor (this.blackspot);
+            this.toggleSelectedColor(this.blackspot);
         } else if (markerColor === "#FF0000") {
             //red
-            this.toggleSelectedColor (this.redspot);
+            this.toggleSelectedColor(this.redspot);
         } else if (markerColor === "#FFFF00") {
             //yellow
-            this.toggleSelectedColor (this.yellowspot);
+            this.toggleSelectedColor(this.yellowspot);
         } else if (markerColor === "#0000FF") {
             //blue
-            this.toggleSelectedColor (this.bluespot);
+            this.toggleSelectedColor(this.bluespot);
         } else {
             //yellow default
-            this.markupCanvas.markupColor = "#FFFF00"; 
-            this.toggleSelectedColor (this.yellowspot);
+            this.markupCanvas.markupColor = "#FFFF00";
+            this.toggleSelectedColor(this.yellowspot);
         }
 
         this.markupCanvas.markupType = markerType;
 
-      return this.imgElement;
+        return this.imgElement;
     }
 
-    close (action) {
+    close(action) {
 
-        try { 
-                let CenterPanelQuery3D ='twx-2d-overlay';
-                let query3D  = document.getElementsByClassName(CenterPanelQuery3D);
-                let CenterPanelQuery2D = 'twx-view-overlay';
-                let query2D  = document.getElementsByClassName(CenterPanelQuery2D);
+        try {
+            let CenterPanelQuery3D = 'twx-2d-overlay';
+            let query3D = document.getElementsByClassName(CenterPanelQuery3D);
+            let CenterPanelQuery2D = 'twx-view-overlay';
+            let query2D = document.getElementsByClassName(CenterPanelQuery2D);
 
-                let element = document.getElementById("ui-container");
-                if (query3D[0]) {
-                  const childElements = query3D[0].getElementsByClassName('ui-container');
-                  const childArray = Array.from(childElements);
-                  childArray.forEach(child => query3D[0].removeChild(child));
+            let element = document.getElementById("ui-container");
+            if (query3D[0]) {
+                const childElements = query3D[0].getElementsByClassName('ui-container');
+                const childArray = Array.from(childElements);
+                childArray.forEach(child => query3D[0].removeChild(child));
 
-                } else if (query2D[0] ) {
-                  const childElements = query2D[0].getElementsByClassName('ui-container');
-                  const childArray = Array.from(childElements);
-                  childArray.forEach(child => query2D[0].removeChild(child));
-                }
+            } else if (query2D[0]) {
+                const childElements = query2D[0].getElementsByClassName('ui-container');
+                const childArray = Array.from(childElements);
+                childArray.forEach(child => query2D[0].removeChild(child));
+            }
 
-                if (action === "FINISHED") {
-                    this.markupCanvas.vuforiaScope.$parent.fireEvent('markCompleted');
-                } else if (action === "CANCELLED") {
-                    this.markupCanvas.vuforiaScope.$parent.fireEvent('markCancelled');
-                }
+            if (action === "FINISHED") {
+                this.markupCanvas.vuforiaScope.$parent.fireEvent('markCompleted');
+            } else if (action === "CANCELLED") {
+                this.markupCanvas.vuforiaScope.$parent.fireEvent('markCancelled');
+            }
 
-                this.markupCanvas.vuforiaScope.markupField = "";
+            this.markupCanvas.vuforiaScope.markupField = "";
 
         } catch (ex) {
-            alert("Issue in closing UI "+ ex);
+            alert("Issue in closing UI " + ex);
         }
-      
-      }
+
+    }
 
 
 }

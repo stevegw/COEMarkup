@@ -132,17 +132,10 @@
         {
           name: 'start',
           label: 'Start MarkUp'
-        }
-        
-        // ,
-        // {
-        //   name: 'takephoto',
-        //   label: 'Take Photo without pause - instead of using camera 3,2,1'
-        // }
+        }  
 
       ],
 
-      // List of events that will displayed in the widget properties panel
       events: [
         {
           name: 'markStart',
@@ -156,12 +149,6 @@
           name: 'markCancelled',
           label: 'Markup cancelled'
         }
-        
-        // ,
-        // {
-        //   name: 'photoTaken',
-        //   label: 'Photo Taken'
-        // }
 
       ],
 

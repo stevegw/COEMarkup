@@ -642,6 +642,7 @@ class MarkupUI {
 
             if (this.markupCanvas.vuforiaScope.markupField != undefined && this.markupCanvas.vuforiaScope.markupField != '') {
 
+
                 if (Number(this.markupCanvas.markupResizeScale) != undefined && this.markupCanvas.markupResizeScale != "") {
                     // Scale image data
                     let scale = Number(this.markupCanvas.markupResizeScale) / this.markupCanvas.canvasWidth;
@@ -650,6 +651,8 @@ class MarkupUI {
                     this.markupCanvas.vuforiaScope.markedupField = this.markupCanvas.scaleMarkupImage(scale);
                     let imageObj = new Object();
                     imageObj.image = this.markupCanvas.scaleMarkupImage(scale);
+                    imageObj.date = new Date();
+
                     this.markupCanvas.vuforiaScope.data.sessionimages.push(imageObj);
                     this.markupCanvas.vuforiaScope.sessionimagesField = this.buildInfoTable(this.markupCanvas.vuforiaScope.data.sessionimages);
                     let contextArray = this.markupCanvas.vuforiaScope.markedupField.split(",");
@@ -661,6 +664,7 @@ class MarkupUI {
                     this.markupCanvas.vuforiaScope.markedupField = this.markupCanvas.drawMarkupOntoImage();
                     let imageObj = new Object();
                     imageObj.image = this.markupCanvas.drawMarkupOntoImage();
+                    imageObj.date = new Date();
                     this.markupCanvas.vuforiaScope.data.sessionimages.push(imageObj);
                     this.markupCanvas.vuforiaScope.sessionimagesField = this.buildInfoTable(this.markupCanvas.vuforiaScope.data.sessionimages);
                     let contextArray = this.markupCanvas.vuforiaScope.markedupField.split(",");

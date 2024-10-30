@@ -544,7 +544,7 @@ class MarkupUI {
         var MarkupToolbarContainer = document.createElement('div');
         MarkupToolbarContainer.id = 'markup-toolbar--container';
         MarkupToolbarContainer.className = 'markup-toolbar';
-        MarkupToolbarContainer.style.bottom = '20px';
+        MarkupToolbarContainer.style.bottom = '50px';
         let viewMenu = document.querySelector(".left-buttons");
         if (viewMenu) {
             MarkupToolbarContainer.style.bottom = '70px';

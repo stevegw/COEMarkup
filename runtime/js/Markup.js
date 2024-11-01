@@ -22,7 +22,7 @@ class Markup {
         console.log("canvasWidth=" + canvasWidth + " canvasHeight=" + canvasHeight);
         let markupCanvas = new MarkupCanvas(vuforiaScope, canvasWidth, canvasHeight, includeborder, includedatestamp, markupColor, markupWidth, markupresizescale);
         this.markupUI = new MarkupUI(markupCanvas, canvasWidth, canvasHeight, imgsrc);
-        markupCanvas.setupLens(imgsrc, this.markupUI.buildMarkUpUI(this.markupType, this.markupColor));
+        markupCanvas.setupLens(imgsrc, this.markupUI.buildMarkUpUI("marker", markupColor));
 
 
     }

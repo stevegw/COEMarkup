@@ -125,6 +125,15 @@
           isBindingTarget: true,
           isBindingSource: false,
           showInput: true
+        },
+        {
+          name: 'hideaugmentations',
+          label: 'Hide Augmentations',
+          datatype: 'boolean',
+          default: false,
+          isBindingTarget: true,
+          isBindingSource: false,
+          showInput: true
         }
       ],
 
@@ -163,7 +172,7 @@
       },
 
       runtimeTemplate: function (props) {
-        var tmpl = '<div ng-markupcoe  autolaunch-field={{me.autolaunch}} markup-field={{me.markup}} markedup-field="me.markedup" markedupdata-field="me.markedupdata"  sessionimages-field="me.sessionimages"  markupcolor-field={{me.markupcolor}}    markupresizescale-field={{me.markupresizescale}}    includeborder-field={{me.includeborder}} includedatestamp-field={{me.includedatestamp}} takenphoto-field="me.takenphoto" delegate-field="delegate" ></div>' ; //original-field="me.original" markedup-field="me.markedup" delegate-field="delegate"></div>';
+        var tmpl = '<div ng-markupcoe  autolaunch-field={{me.autolaunch}} markup-field={{me.markup}} markedup-field="me.markedup" markedupdata-field="me.markedupdata"  sessionimages-field="me.sessionimages"  markupcolor-field={{me.markupcolor}}    markupresizescale-field={{me.markupresizescale}}    includeborder-field={{me.includeborder}} includedatestamp-field={{me.includedatestamp}} takenphoto-field="me.takenphoto" hideaugmentations-field={{me.hideaugmentations}} delegate-field="delegate" ></div>' ; //original-field="me.original" markedup-field="me.markedup" delegate-field="delegate"></div>';
         return tmpl;
       }
     };

@@ -20,6 +20,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
         sessionimagesField: '=',
         includeborderField: '@',
         includedatestampField: '@',
+        hideaugmentationsField: '@',
         markupcolorField: '@',
         markupthicknessField: '@',
         markupresizescaleField: '@',
@@ -73,7 +74,15 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
             let incomingMarkup = scope.markupField;
 
             if (incomingMarkup === undefined || incomingMarkup === "") {
-              takeScreenShot(true);
+
+              var showAugmentation = true;
+              if (scope.hideaugmentationsField === "true") {
+                showAugmentation = false;
+                }
+             if (scope.hideaugmentationsField === "false") {
+                showAugmentation = true;
+              }
+              takeScreenShot(showAugmentation);
             } else {
               let markup = new Markup(scope, scope.markupField, scope.includeborderField, scope.includedatestampField, scope.markupcolorField, scope.markupthicknessField, scope.markupresizescaleField);
               scope.data.markedup = markup;
@@ -86,8 +95,8 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
 
 
 
-        var executeTakePhoto = function () {
-          takeScreenShot(true);
+        var executeTakePhoto = function (hideaugmentations) {
+          takeScreenShot(hideaugmentations);
         }
 
 

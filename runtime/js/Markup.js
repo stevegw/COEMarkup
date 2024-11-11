@@ -13,8 +13,8 @@ class Markup {
             markupColor = "#FF0000";
         } else if (String(markupColor).toLowerCase === "yellow" || markupColor === "#FFFF00") {
             markupColor = "#FFFF00";
-        } else if (String(markupColor).toLowerCase === "blue" || markupColor === "#0000FF") {
-            markupColor = "#0000FF";
+        } else if (String(markupColor).toLowerCase === "blue" || markupColor === "#0BABC7") {
+            markupColor = "#0BABC7";
         } else {
             markupColor = "#FFFF00";
         }
@@ -579,7 +579,7 @@ class MarkupUI {
         MarkupToolbarContainer.appendChild(this.bluespot);
 
         this.bluespot.addEventListener("click", () => {
-            this.markupCanvas.markupColor = "#0000FF";
+            this.markupCanvas.markupColor = "#0BABC7";
             this.toggleSelectedColor(this.bluespot);
         });
 
@@ -724,7 +724,7 @@ class MarkupUI {
         } else if (markerColor === "#FFFF00") {
             //yellow
             this.toggleSelectedColor(this.yellowspot);
-        } else if (markerColor === "#0000FF") {
+        } else if (markerColor === "#0BABC7") {
             //blue
             this.toggleSelectedColor(this.bluespot);
         } else {

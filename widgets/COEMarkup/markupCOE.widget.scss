@@ -28,8 +28,8 @@
 	position: absolute;
 
 	top: unset !important;
-	left: calc(50vw - 203px); 
-	width: 405px;
+	left: calc(50vw - 253px); 
+	width: 455px;
 	height: 60px !important;
 	padding: 5px !important;
 	border-style: solid;
@@ -106,6 +106,17 @@
 	position: absolute;
 	top: 10px;
 	left: 350px;
+	width: 40px;
+	height: 40px;
+	background-color: transparent !important;
+	z-Index: 920;
+	src: "../extensions/images/Markup_blackspot.png";
+}
+
+.white {
+	position: absolute;
+	top: 10px;
+	left: 395px;
 	width: 40px;
 	height: 40px;
 	background-color: transparent !important;

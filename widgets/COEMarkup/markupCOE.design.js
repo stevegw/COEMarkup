@@ -162,7 +162,7 @@
       ],
 
       dependencies: {
-        files         : ['js/markupCOE-ng.js','js/Markup.js', 'images/Markup_arrow.png', 'images/Markup_arrowSelected.png', 'images/Markup_blackspot.png', 'images/Markup_blackspotSelected.png', 'images/Markup_bluespot.png', 'images/Markup_bluespotSelected.png','images/Markup_redspot.png', 'images/Markup_redspotSelected.png','images/Markup_yellowspot.png', 'images/Markup_yellowspotSelected.png','images/Markup_marker.png', 'images/Markup_markerSelected.png','images/Markup_reset.png', 'images/Markup_save.png' ,'images/Markup_cancel.png'],
+        files         : ['js/markupCOE-ng.js','js/Markup.js', 'images/Markup_arrow.png', 'images/Markup_arrowSelected.png', 'images/Markup_whitespotSelected.png','images/Markup_whitespot.png', 'images/Markup_blackspot.png', 'images/Markup_blackspotSelected.png', 'images/Markup_bluespot.png', 'images/Markup_bluespotSelected.png','images/Markup_redspot.png', 'images/Markup_redspotSelected.png','images/Markup_yellowspot.png', 'images/Markup_yellowspotSelected.png','images/Markup_marker.png', 'images/Markup_markerSelected.png','images/Markup_reset.png', 'images/Markup_save.png' ,'images/Markup_cancel.png'],
         angularModules: ['markupcoe-ng']
       },
 

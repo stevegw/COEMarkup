@@ -15,10 +15,15 @@ class Markup {
             markupColor = "#FFFF00";
         } else if (String(markupColor).toLowerCase === "blue" || markupColor === "#0BABC7") {
             markupColor = "#0BABC7";
+        }
+        else if (String(markupColor).toLowerCase === "white" || markupColor === "#FFFFFF") {
+            markupColor = "#FFFFFF";
         } else {
             markupColor = "#FFFF00";
         }
 
+
+        
         console.log("canvasWidth=" + canvasWidth + " canvasHeight=" + canvasHeight);
         let markupCanvas = new MarkupCanvas(vuforiaScope, canvasWidth, canvasHeight, includeborder, includedatestamp, markupColor, markupWidth, markupresizescale);
         this.markupUI = new MarkupUI(markupCanvas, canvasWidth, canvasHeight, imgsrc);
@@ -456,6 +461,7 @@ class MarkupUI {
     markupCurrentColor;
 
     blackspot;
+    whitespot;
     redSpot;
     yellowspot;
     bluespot;
@@ -482,6 +488,7 @@ class MarkupUI {
 
     toggleSelectedColor(element) {
 
+        this.whitespot.src = "extensions/images/Markup_whitespot.png";
         this.blackspot.src = "extensions/images/Markup_blackspot.png";
         this.yellowspot.src = "extensions/images/Markup_yellowspot.png";
         this.redspot.src = "extensions/images/Markup_redspot.png";
@@ -495,6 +502,8 @@ class MarkupUI {
             element.src = "extensions/images/Markup_bluespotSelected.png";
         } else if (element.id === "red") {
             element.src = "extensions/images/Markup_redspotSelected.png";
+        } else if (element.id === "white") {
+            element.src = "extensions/images/Markup_whitespotSelected.png";
         }
 
         this.imgElement.style.borderColor = this.markupCanvas.markupColor;
@@ -592,6 +601,17 @@ class MarkupUI {
         this.blackspot.addEventListener("click", () => {
             this.markupCanvas.markupColor = "#000000";
             this.toggleSelectedColor(this.blackspot);
+        });
+
+        this.whitespot = document.createElement('img');
+        this.whitespot.id = "white";
+        this.whitespot.className = "white";
+
+        MarkupToolbarContainer.appendChild(this.whitespot);
+
+        this.whitespot.addEventListener("click", () => {
+            this.markupCanvas.markupColor = "#FFFFFF";
+            this.toggleSelectedColor(this.whitespot);
         });
 
         var marker = document.createElement('img');
@@ -727,6 +747,9 @@ class MarkupUI {
         } else if (markerColor === "#0BABC7") {
             //blue
             this.toggleSelectedColor(this.bluespot);
+        } else if (markerColor === "#FFFFFF") {
+            //white
+            this.toggleSelectedColor(this.whitespot);
         } else {
             //yellow default
             this.markupCanvas.markupColor = "#FFFF00";
